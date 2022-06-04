@@ -5,7 +5,6 @@
 Create /core/Firebase.js as below.
 ```JavaScript
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 
 // Paste our web app's Firebase configuration
 const firebaseConfig = {
