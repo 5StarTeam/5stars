@@ -25,9 +25,9 @@ npm install -g expo-cli
 Or on Yarn:
 ```
 yarn global add expo-cli
-   ```
+```
 
-### Start up and run
+## Start up and run
 In 5stars root directory, run
 ```
 expo start
