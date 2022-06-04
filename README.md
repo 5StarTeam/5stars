@@ -30,7 +30,9 @@ yarn global add expo-cli
 ```
 #### Project Dependecies 
 Get project dependecies by running yarn:
-```yarn```
+```
+yarn
+```
 
 ## Start up and run
 In 5stars root directory, run
