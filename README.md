@@ -1,18 +1,36 @@
 # 5stars
 
 ## Setup
+### Setup Firebase configuration. 
+Create /core/Firebase.js as below.
+```JavaScript
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
-1. With Node 14 LTS or greater installed, use npm to install the Expo CLI command line utility:
+// Paste our web app's Firebase configuration
+const firebaseConfig = {
+  //...
+};
+
+// Initialize Firebase
+export const app = initializeApp(firebaseConfig);
+```
+Next, go to firebase > 5stars > Project Settings (click on gear icon at Project Overview) and paste the app config details into core/Firebase.js.
+
+### Install Required Dependencies
+With Node 14 LTS or greater installed, use npm to install the Expo CLI command line utility:
+```
+npm install -g expo-cli
+```
+Or on Yarn:
+```
+yarn global add expo-cli
    ```
-   npm install -g expo-cli
-   ```
-   Or on Yarn:
-   ```
-   yarn global add expo-cli
-   ```
-2. In 5stars root directory, run
-   ```
-   expo start
-   ```
+
+### Start up and run
+In 5stars root directory, run
+```
+expo start
+```
 
 
