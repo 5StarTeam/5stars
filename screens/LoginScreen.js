@@ -2,20 +2,27 @@ import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { app } from '../core/Firebase'
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
 
-const auth = getAuth(app);
+const auth = getAuth(app)
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   
   const navigation = useNavigation()
-  
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, user => {
-          user && navigation.replace("Home")
-      });
+      if (!user) {
+        return
+      }
+      if (!user.emailVerified) {
+        navigation.replace('Verify')
+      } else {
+        navigation.replace('Home')
+      }
+    })
 
     return unsubscribe
   }, []) //Empty array means this will run on component mount
@@ -23,8 +30,11 @@ const LoginScreen = () => {
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(userCredentials => {
-        const user = userCredentials.user;
-        console.log('Registered with:', user.email);
+        const user = userCredentials.user
+        console.log('Registered with:', user.email)
+        if (user.emailVerified === false) {
+          sendEmailVerification(user)
+        }
       })
       .catch(error => alert(error.message))
   }
@@ -32,8 +42,8 @@ const LoginScreen = () => {
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(userCredentials => {
-        const user = userCredentials.user;
-        console.log('Logged in with:', user.email);
+        const user = userCredentials.user
+        console.log('Logged in with:', user.email)
       })
       .catch(error => alert(error.message))
   }

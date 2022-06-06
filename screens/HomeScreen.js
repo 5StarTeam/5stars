@@ -12,13 +12,13 @@ const HomeScreen = () => {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        navigation.replace("Login")
+        navigation.replace('Login')
       })
       .catch(error => alert(error.message))
   }
 
   const handleExample = () => {
-    navigation.replace("Example")
+    navigation.replace('Example')
   }
 
   return (
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
    button: {
     backgroundColor: '#0782F9',
