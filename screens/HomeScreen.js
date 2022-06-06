@@ -12,30 +12,24 @@ const HomeScreen = () => {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        navigation.replace("Login")
+        navigation.replace('Login')
       })
       .catch(error => alert(error.message))
   }
 
   const handleExample = () => {
-    navigation.replace("Example")
+    navigation.replace('Example')
   }
 
   return (
     <View style={styles.container}>
-    <Text>Email: {auth.currentUser?.email}</Text>
-    <TouchableOpacity
-        onPress={handleSignOut}
-        style={styles.button}
-    >
+      <Text>Email: {auth.currentUser?.email}</Text>
+      <TouchableOpacity onPress={handleSignOut} style={styles.button}>
         <Text style={styles.buttonText}>Sign out</Text>
-    </TouchableOpacity>
-    <TouchableOpacity 
-        onPress={handleExample}
-        style={styles.button}
-    >
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleExample} style={styles.button}>
         <Text style={styles.buttonText}>CRUD Page</Text>
-    </TouchableOpacity>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -46,9 +40,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
-   button: {
+  button: {
     backgroundColor: '#0782F9',
     width: '60%',
     padding: 15,
