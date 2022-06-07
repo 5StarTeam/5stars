@@ -21,6 +21,10 @@ const HomeScreen = () => {
     navigation.replace('Example')
   }
 
+  const handleNavigateBottomDrawer = () => {
+    navigation.navigate("Explore Bottom Drawer")
+  }
+
   return (
     <View style={styles.container}>
       <Text>Email: {auth.currentUser?.email}</Text>
@@ -29,6 +33,9 @@ const HomeScreen = () => {
       </TouchableOpacity>
       <TouchableOpacity onPress={handleExample} style={styles.button}>
         <Text style={styles.buttonText}>CRUD Page</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleNavigateBottomDrawer} style={styles.button}>
+        <Text style={styles.buttonText}>Explore Bottom Drawer</Text>
       </TouchableOpacity>
     </View>
   )
