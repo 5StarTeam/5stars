@@ -6,6 +6,9 @@ const placeholderColor = "#AE908C";
 const primaryColor = "#E6998C";
 
 export const globalStyles = StyleSheet.create({
+  keyboardAvoidViewContainer: {
+    flex: 1,
+  },
   signupLoginContainer: {
     padding: '10%',
     justifyContent: 'center',
