@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
 import {
   KeyboardAvoidingView,
+  TouchableWithoutFeedback,
   Text,
   TextInput,
   TouchableOpacity,
@@ -48,7 +49,7 @@ const LoginScreen = () => {
   }
 
   return (
-    <KeyboardAvoidingView onPress={() => Keyboard.dismiss()} behavior="padding" style={globalStyles.keyboardAvoidViewContainer}>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} behavior="padding" style={{ flex: 1}}>
       <View style={globalStyles.signupLoginContainer}>
         <Text style={globalStyles.titleText}>Login to BirdGO</Text>
         <View style={globalStyles.inputWrapper}>
@@ -107,7 +108,7 @@ const LoginScreen = () => {
           <Text style={globalStyles.btnTextAlt}>SIGN UP</Text>
         </TouchableOpacity>
       </View>
-    </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   )
 }
 

@@ -22,7 +22,7 @@ const HomeScreen = () => {
   }
 
   const handleNavigateBottomDrawer = () => {
-    navigation.navigate("Explore Bottom Drawer")
+    navigation.navigate("Explore Bottom Sheet")
   }
 
   return (
