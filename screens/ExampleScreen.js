@@ -3,12 +3,15 @@ import React, { useState } from 'react'
 import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
 import app from '../core/Firebase';
 import { getFirestore } from "firebase/firestore";
+import { Route } from '../services/RoutingService';
+import { useNavigation } from '@react-navigation/native';
 
 // We're performing CRUD on a single firestore document.
 const exampleCollectionName = "ExampleCollection"
 const exampleDocumentName = "ExampleDocument"
 const ExampleScreen = () => {
     const db = getFirestore(app)
+    const navigation = useNavigation()
     const [exampleDoc, setExampleDoc] = useState(null)
     const [text, setText] = useState("")
     // MARK: Firestore v9 example CRUD functions
@@ -81,6 +84,7 @@ const ExampleScreen = () => {
           }, true)
         }} disabled={text === ""} />
       <Button title='Delete Example Doc' onPress={Delete} />
+      <Button title='Home' onPress={() => navigation.replace(Route.Home)} />
     </View>
   )
 }

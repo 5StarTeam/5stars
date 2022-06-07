@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/core'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { app } from '../core/Firebase'
 import { getAuth, signOut } from 'firebase/auth'
+import { Route } from '../services/RoutingService'
 
 const auth = getAuth(app)
 
@@ -21,6 +22,10 @@ const HomeScreen = () => {
     navigation.replace("Example")
   }
 
+  const handleUpload = () => {
+    navigation.replace(Route.Upload)
+  }
+
   return (
     <View style={styles.container}>
     <Text>Email: {auth.currentUser?.email}</Text>
@@ -35,6 +40,12 @@ const HomeScreen = () => {
         style={styles.button}
     >
         <Text style={styles.buttonText}>CRUD Page</Text>
+    </TouchableOpacity>
+    <TouchableOpacity 
+        onPress={handleUpload}
+        style={styles.button}
+    >
+        <Text style={styles.buttonText}>Upload Page</Text>
     </TouchableOpacity>
     </View>
   )
