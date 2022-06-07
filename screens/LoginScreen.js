@@ -1,8 +1,20 @@
 import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import {
+  KeyboardAvoidingView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  TouchableWithoutFeedback,
+  Keyboard,
+  TouchableWithoutFeedbackComponent,
+} from 'react-native'
 import { app } from '../core/Firebase'
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
+import { MaterialIcons, Ionicons } from "@expo/vector-icons";
+import { globalStyles } from "../styles/global";
 
 const auth = getAuth(app)
 
@@ -39,27 +51,95 @@ const LoginScreen = () => {
   }
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <View style={styles.inputContainer}>
-        <TextInput placeholder="Email" value={email} onChangeText={text => setEmail(text)} style={styles.input} />
-        <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={text => setPassword(text)}
-          style={styles.input}
-          secureTextEntry
-        />
-      </View>
+    // <KeyboardAvoidingView style={styles.container} behavior="padding">
+    //   <View style={styles.inputContainer}>
+    //     <TextInput placeholder="Email" value={email} onChangeText={text => setEmail(text)} style={styles.input} />
+    //     <TextInput
+    //       placeholder="Password"
+    //       value={password}
+    //       onChangeText={text => setPassword(text)}
+    //       style={styles.input}
+    //       secureTextEntry
+    //     />
+    //   </View>
+    //
+    //   <View style={styles.buttonContainer}>
+    //     <TouchableOpacity onPress={handleLogin} style={styles.button}>
+    //       <Text style={styles.buttonText}>Login</Text>
+    //     </TouchableOpacity>
+    //     <TouchableOpacity onPress={handleSignUp} style={[styles.button, styles.buttonOutline]}>
+    //       <Text style={styles.buttonOutlineText}>Register</Text>
+    //     </TouchableOpacity>
+    //   </View>
+    // </KeyboardAvoidingView>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={globalStyles.signupLoginContainer}>
+        <Text style={globalStyles.titleText}>Login to BirdGO</Text>
+        <View style={globalStyles.inputWrapper}>
+          <View style={globalStyles.iconWrapper}>
+            {/*<FontAwesome5*/}
+            {/*  name="user-alt"*/}
+            {/*  size={18}*/}
+            {/*  color="#d4af95"*/}
+            {/*  style={{*/}
+            {/*    marginLeft: 2,*/}
+            {/*  }}*/}
+            {/*/>*/}
+            <Ionicons
+              name="mail"
+              size={18}
+              color="#AE908C"
+              style={{
+                marginLeft: 2,
+              }}
+            />
+          </View>
+          <TextInput
+            autoCapitalize="none"
+            autoComplete="email"
+            style={globalStyles.input}
+            placeholderTextColor="#AE908C"
+            placeholder="Email"
+            value={email}
+            onChangeText={(value) => setEmail(value)}
+          />
+        </View>
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={handleLogin} style={styles.button}>
-          <Text style={styles.buttonText}>Login</Text>
+        <View style={globalStyles.inputWrapper}>
+          <View style={globalStyles.iconWrapper}>
+            <MaterialIcons name="lock" size={20} color="#AE908C" />
+          </View>
+          <TextInput
+            autoCapitalize="none"
+            autoComplete="password"
+            style={globalStyles.input}
+            placeholderTextColor="#AE908C"
+            placeholder="Password"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={(value) => setPassword(value)}
+          />
+        </View>
+
+        <TouchableOpacity
+          style={globalStyles.btnContainer}
+          onPress={handleLogin}
+        >
+          <Text style={globalStyles.btnText}>LOGIN</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleSignUp} style={[styles.button, styles.buttonOutline]}>
-          <Text style={styles.buttonOutlineText}>Register</Text>
+
+        <Text style={{ marginTop: 20, marginBottom: 5, color: "#AE908C" }}>
+          New Here?
+        </Text>
+
+        <TouchableOpacity
+          style={globalStyles.btnContainerAlt}
+          onPress={() => handleSignUp()}
+        >
+          <Text style={globalStyles.btnTextAlt}>SIGN UP</Text>
         </TouchableOpacity>
       </View>
-    </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   )
 }
 
