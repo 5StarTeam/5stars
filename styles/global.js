@@ -174,7 +174,7 @@ export const globalStyles = StyleSheet.create({
     borderTopRightRadius: 12,
     resizeMode: 'cover',
   },
-  adventuresContainer: {
+  exploreSightsContainer: {
     flexWrap: 'wrap',
     flexDirection: 'row',
     justifyContent: 'space-between',

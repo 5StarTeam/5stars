@@ -59,7 +59,7 @@ const BottomSheet = forwardRef(({children}, ref) => {
   });
 
   useEffect(() => {
-    translateY.value = withSpring(-SCREEN_HEIGHT / 2.5, {damping: 12});
+    translateY.value = withSpring(-SCREEN_HEIGHT / 2.2, {damping: 12});
   }, []);
 
   return (
