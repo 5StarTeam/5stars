@@ -24,10 +24,20 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "BirdGo.com"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "@rnmapbox/maps",
+        {
+          "RNMapboxMapsImpl": "maplibre",
+          "RNMapboxMapsDownloadToken": "sk.eyJ1IjoiYWtod2VlIiwiYSI6ImNsNDRlZzN3MDFleXUzYnF0NXJuMzUxN3AifQ.HPlWyQDHH5v9bZeHD3rGsQ"
+        }
+      ]
+    ]
   }
 }
