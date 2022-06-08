@@ -1,14 +1,6 @@
 import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
-import {
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-  Keyboard,
-} from 'react-native'
+import { KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View, Keyboard } from 'react-native'
 import { app } from '../core/Firebase'
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
 import { MaterialIcons, Ionicons } from '@expo/vector-icons'
@@ -49,7 +41,11 @@ const LoginScreen = () => {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} behavior="padding" style={{ flex: 1 }}>
+    <KeyboardAvoidingView
+      onPress={() => Keyboard.dismiss()}
+      behavior="padding"
+      style={globalStyles.keyboardAvoidViewContainer}
+    >
       <View style={globalStyles.signupLoginContainer}>
         <Text style={globalStyles.titleText}>Login to BirdGO</Text>
         <View style={globalStyles.inputWrapper}>
@@ -100,7 +96,7 @@ const LoginScreen = () => {
           <Text style={globalStyles.btnTextAlt}>SIGN UP</Text>
         </TouchableOpacity>
       </View>
-    </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   )
 }
 
