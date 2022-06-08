@@ -11,8 +11,8 @@ import {
 } from 'react-native'
 import { app } from '../core/Firebase'
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
-import { MaterialIcons, Ionicons } from "@expo/vector-icons";
-import { globalStyles } from "../styles/global";
+import { MaterialIcons, Ionicons } from '@expo/vector-icons'
+import { globalStyles } from '../styles/global'
 
 const auth = getAuth(app)
 
@@ -49,7 +49,7 @@ const LoginScreen = () => {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} behavior="padding" style={{ flex: 1}}>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} behavior="padding" style={{ flex: 1 }}>
       <View style={globalStyles.signupLoginContainer}>
         <Text style={globalStyles.titleText}>Login to BirdGO</Text>
         <View style={globalStyles.inputWrapper}>
@@ -70,7 +70,7 @@ const LoginScreen = () => {
             placeholderTextColor="#AE908C"
             placeholder="Email"
             value={email}
-            onChangeText={(value) => setEmail(value)}
+            onChangeText={value => setEmail(value)}
           />
         </View>
 
@@ -86,25 +86,17 @@ const LoginScreen = () => {
             placeholder="Password"
             secureTextEntry={true}
             value={password}
-            onChangeText={(value) => setPassword(value)}
+            onChangeText={value => setPassword(value)}
           />
         </View>
 
-        <TouchableOpacity
-          style={globalStyles.btnContainer}
-          onPress={handleLogin}
-        >
+        <TouchableOpacity style={globalStyles.btnContainer} onPress={handleLogin}>
           <Text style={globalStyles.btnText}>LOGIN</Text>
         </TouchableOpacity>
 
-        <Text style={{ marginTop: 20, marginBottom: 5, color: "#AE908C" }}>
-          New Here?
-        </Text>
+        <Text style={{ marginTop: 20, marginBottom: 5, color: '#AE908C' }}>New Here?</Text>
 
-        <TouchableOpacity
-          style={globalStyles.btnContainerAlt}
-          onPress={() => handleSignUp()}
-        >
+        <TouchableOpacity style={globalStyles.btnContainerAlt} onPress={() => handleSignUp()}>
           <Text style={globalStyles.btnTextAlt}>SIGN UP</Text>
         </TouchableOpacity>
       </View>

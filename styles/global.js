@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native'
 
-const inputBg = "#FBEFED";
-const textColor = "#68433D";
-const placeholderColor = "#AE908C";
-const primaryColor = "#E6998C";
+const inputBg = '#FBEFED'
+const textColor = '#68433D'
+const placeholderColor = '#AE908C'
+const primaryColor = '#E6998C'
 
 export const globalStyles = StyleSheet.create({
   signupLoginContainer: {
@@ -122,8 +122,7 @@ export const globalStyles = StyleSheet.create({
     paddingHorizontal: '3%',
   },
   tripsContainer: {
-    backgroundColor: '#FFFAFA',
-    paddingVertical: 10,
+    paddingVertical: 5,
     paddingHorizontal: 10,
     flex: 1,
   },
@@ -179,6 +178,11 @@ export const globalStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  exploreSightsScrollContainer: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    // justifyContent: 'space-between',
+  },
   greyText: {
     color: '#647A91',
   },
@@ -214,5 +218,4 @@ export const globalStyles = StyleSheet.create({
     justifyContent: 'space-between',
     // width: "100%",
   },
-
 })
