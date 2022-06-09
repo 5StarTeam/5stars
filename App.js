@@ -1,7 +1,6 @@
 import '@env'
 import React from 'react';
 import { Route } from './services/RoutingService';
-import { NativeBaseProvider } from "native-base";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ExploreScreen from './screens/ExploreScreen'
@@ -22,12 +21,12 @@ export default function App() {
   <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name={"Upload"} component={UploadScreen} />
-          <Stack.Screen name="Example" component={ExampleScreen} />
-          <Stack.Screen name="Explore Bottom Drawer" component={ExploreBottomDrawer} />
-          <Stack.Screen name="Explore Map" component={ExploreScreen} />
+          <Stack.Screen options={{ headerShown: false }} name={Route.LOGIN} component={LoginScreen} />
+          <Stack.Screen name={Route.HOME} component={HomeScreen} />
+          <Stack.Screen name={Route.UPLOAD} component={UploadScreen} />
+          <Stack.Screen name={Route.EXAMPLE} component={ExampleScreen} />
+          <Stack.Screen name={Route.EXPLORE_BOTTOM_DRAWER} component={ExploreBottomDrawer} />
+          <Stack.Screen name={Route.EXPLORE} component={ExploreScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

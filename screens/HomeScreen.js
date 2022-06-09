@@ -31,7 +31,7 @@ const HomeScreen = () => {
   }
 
   const handleUpload = () => {
-    navigation.replace(Route.Upload)
+    navigation.replace(Route.UPLOAD)
   }
 
   return (
