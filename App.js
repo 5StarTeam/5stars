@@ -1,3 +1,5 @@
+import 'expo-dev-client'
+
 import React from 'react'
 import '@env'
 import { NavigationContainer } from '@react-navigation/native'
