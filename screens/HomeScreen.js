@@ -21,6 +21,14 @@ const HomeScreen = () => {
     navigation.replace('Example')
   }
 
+  const handleNavigateBottomDrawer = () => {
+    navigation.navigate("Explore Bottom Drawer")
+  }
+
+  const handleExplore = () => {
+    navigation.navigate("Explore Map");
+  }
+
   return (
     <View style={styles.container}>
       <Text>Email: {auth.currentUser?.email}</Text>
@@ -29,6 +37,12 @@ const HomeScreen = () => {
       </TouchableOpacity>
       <TouchableOpacity onPress={handleExample} style={styles.button}>
         <Text style={styles.buttonText}>CRUD Page</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleNavigateBottomDrawer} style={styles.button}>
+        <Text style={styles.buttonText}>Explore Bottom Drawer</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleExplore} style={styles.button}>
+        <Text style={styles.buttonText}>Explore Map</Text>
       </TouchableOpacity>
     </View>
   )
