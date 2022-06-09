@@ -1,26 +1,23 @@
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore'
-import app from '../core/Firebase'
-import { getFirestore } from 'firebase/firestore'
+import { firestore as db } from "@react-native-firebase/firestore"
 
 // We're performing CRUD on a single firestore document.
 const exampleCollectionName = 'ExampleCollection'
 const exampleDocumentName = 'ExampleDocument'
+const exampleDocReference = db.collection(exampleCollectionName).doc(exampleDocumentName)
 const ExampleScreen = () => {
-  const db = getFirestore(app)
   const [exampleDoc, setExampleDoc] = useState(null)
   const [text, setText] = useState('')
-  // MARK: Firestore v9 example CRUD functions
-  // NOTE: Syntax has changed since v8
+  // MARK: react-native-firebase/firestore v6 example CRUD functions
   const Create = () => {
-    const exampleDoc = doc(db, exampleCollectionName, exampleDocumentName)
     const docData = {
       'string-field-1': 'placeholder text',
       'num-field-1': 1,
       'read-me': 'Hello World!',
     }
-    setDoc(exampleDoc, docData)
+    exampleDocReference.add(docData)
       // NOTE: This is a promise (that's why you should use typescript, then its clear :] )
       .then(() => {
         alert('Document Created!')
@@ -32,10 +29,8 @@ const ExampleScreen = () => {
   const Read = () => {
     // Read whatever document by changing the target collection and path here.
     // You can also read entire collections: https://firebase.google.com/docs/firestore/quickstart#read_data
-    const exampleDoc = doc(db, exampleCollectionName, exampleDocumentName)
-
-    getDoc(exampleDoc)
-      .then(snapshot => {
+    exampleDocReference.get()
+      .then((snapshot) => {
         if (snapshot.exists) {
           setExampleDoc(snapshot.data())
         } else {
@@ -47,10 +42,8 @@ const ExampleScreen = () => {
       })
   }
   const Update = (value, merge) => {
-    const exampleDoc = doc(db, exampleCollectionName, exampleDocumentName)
-
+    exampleDocReference.set( value, { merge: merge })
     // If merge is true then it will merge with an existing doc, otherwise it will be a fresh one.
-    setDoc(exampleDoc, value, { merge: merge })
       .then(() => {
         alert('Updated Successfully!')
         setText('')
@@ -60,9 +53,7 @@ const ExampleScreen = () => {
       })
   }
   const Delete = () => {
-    const exampleDoc = doc(db, exampleCollectionName, exampleDocumentName)
-
-    deleteDoc(exampleDoc)
+    exampleDocReference.delete()
       .then(() => {
         alert('Deleted Successfully!')
       })
