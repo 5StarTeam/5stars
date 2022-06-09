@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native'
 import React, { useState } from 'react'
-import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore'
 import { firestore as db } from "@react-native-firebase/firestore"
 
 // We're performing CRUD on a single firestore document.
@@ -17,7 +16,7 @@ const ExampleScreen = () => {
       'num-field-1': 1,
       'read-me': 'Hello World!',
     }
-    exampleDocReference.add(docData)
+    exampleDocReference.set(docData)
       // NOTE: This is a promise (that's why you should use typescript, then its clear :] )
       .then(() => {
         alert('Document Created!')
