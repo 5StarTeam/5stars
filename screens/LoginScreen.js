@@ -10,7 +10,7 @@ import {
   Keyboard,
 } from 'react-native'
 import { app } from '../core/Firebase'
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
 import { MaterialIcons, Ionicons } from '@expo/vector-icons'
 import { globalStyles } from '../styles/global'
 // import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
@@ -25,7 +25,14 @@ const LoginScreen = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, user => {
-      user && navigation.replace('Home')
+      if (!user) {
+        return
+      }
+      if (!user.emailVerified) {
+        navigation.replace('Verify')
+      } else {
+        navigation.replace('Home')
+      }
     })
 
     return unsubscribe
@@ -36,6 +43,9 @@ const LoginScreen = () => {
       .then(userCredentials => {
         const user = userCredentials.user
         console.log('Registered with:', user.email)
+        if (user.emailVerified === false) {
+          sendEmailVerification(user)
+        }
       })
       .catch(error => alert(error.message))
   }

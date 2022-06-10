@@ -6,6 +6,7 @@ import ExampleScreen from './screens/ExampleScreen'
 import LoginScreen from './screens/LoginScreen'
 import HomeScreen from './screens/HomeScreen'
 import ExploreBottomSheet from './screens/ExploreBottomSheet'
+import VerifyScreen from './screens/VerifyScreen'
 import ExploreScreen from './screens/ExploreScreen'
 
 import { Provider } from 'react-redux'
@@ -20,6 +21,7 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
           <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Verify" component={VerifyScreen} />
           <Stack.Screen name="Example" component={ExampleScreen} />
           <Stack.Screen name="Explore Bottom Sheet" component={ExploreBottomSheet} />
           <Stack.Screen name="Explore Map" component={ExploreScreen} />
