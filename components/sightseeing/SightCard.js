@@ -1,12 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableHighlight,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-} from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
 import React from 'react'
 import { globalStyles } from '../../styles/global'
 
@@ -20,12 +12,12 @@ export default function SightCard({ handlePress, sight, isHorizontalScroll }) {
     <TouchableWithoutFeedback onPress={handlePress}>
       <View style={isHorizontalScroll ? styles.sightCardScrollContainer : styles.sightCardContainer}>
         <Image
-          source={{ uri: 'http://animal.memozee.com/ArchOLD-7/1197452567.jpg' }}
+          source={{ uri: sight.imageUrl ?? 'http://animal.memozee.com/ArchOLD-7/1197452567.jpg' }}
           style={globalStyles.itineraryImageSmall}
         />
         <Text style={styles.sightBirdName}>{sight.commonName}</Text>
         <View style={styles.rarityTimeWrapper}>
-          <Text style={styles.sightBirdLabel}>{sight.rarity}</Text>
+          <Text style={styles.sightBirdLabel}>{sight.localStatus}</Text>
           <Text style={styles.sightBirdTime}>{sight.createdAt}</Text>
         </View>
       </View>

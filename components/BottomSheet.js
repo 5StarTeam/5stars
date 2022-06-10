@@ -12,37 +12,38 @@ import Animated, {
 import { globalStyles } from '../styles/global'
 import SightCard from './sightseeing/SightCard'
 import { doc, getDocs, setDoc, deleteDoc, collection } from 'firebase/firestore'
-import app from '../core/Firebase'
+import { app, db } from '../core/Firebase'
 import { getFirestore } from 'firebase/firestore'
 import { async } from '@firebase/util'
+import SortContainer from './sightseeing/sortContainer'
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window')
 
 const BottomSheet = forwardRef(({ children }, ref) => {
-  const db = getFirestore(app)
+  // const db = getFirestore(app)
   const translateY = useSharedValue(0)
   const active = useSharedValue(false)
   const context = useSharedValue({ y: 0 })
   const [isVertical, setIsVertical] = useState(false)
   // 0 for rarest, 1 for latest
   const [sort, setSort] = useState(0)
-  const [sights, setSights] = useState(
-    [
-      { commonName: 'alice', rarity: 5, createdAt: 20 },
-      { commonName: 'betty', rarity: 2, createdAt: 10 },
-      { commonName: 'carol', rarity: 1, createdAt: 30 },
-      { commonName: 'dave', rarity: 10, createdAt: 30 },
-      { commonName: 'elsa', rarity: 5, createdAt: 40 },
-      { commonName: 'felix', rarity: 6, createdAt: 50 },
-      { commonName: 'george', rarity: 7, createdAt: 60 },
-      { commonName: 'holger', rarity: 8, createdAt: 70 },
-      { commonName: 'ida', rarity: 9, createdAt: 80 },
-      { commonName: 'john', rarity: 5, createdAt: 90 },
-      { commonName: 'klare', rarity: 5, createdAt: 35 },
-      { commonName: 'luna', rarity: 5, createdAt: 37 },
-    ].sort((a, b) => b.rarity - a.rarity)
-  )
-  const [sightsData, setSightsData] = useState(null)
+  // const [sights, setSights] = useState(
+  //   [
+  //     { commonName: 'alice', rarity: 5, createdAt: 20 },
+  //     { commonName: 'betty', rarity: 2, createdAt: 10 },
+  //     { commonName: 'carol', rarity: 1, createdAt: 30 },
+  //     { commonName: 'dave', rarity: 10, createdAt: 30 },
+  //     { commonName: 'elsa', rarity: 5, createdAt: 40 },
+  //     { commonName: 'felix', rarity: 6, createdAt: 50 },
+  //     { commonName: 'george', rarity: 7, createdAt: 60 },
+  //     { commonName: 'holger', rarity: 8, createdAt: 70 },
+  //     { commonName: 'ida', rarity: 9, createdAt: 80 },
+  //     { commonName: 'john', rarity: 5, createdAt: 90 },
+  //     { commonName: 'klare', rarity: 5, createdAt: 35 },
+  //     { commonName: 'luna', rarity: 5, createdAt: 37 },
+  //   ].sort((a, b) => b.rarity - a.rarity)
+  // )
+  const [sightsData, setSightsData] = useState()
 
   const scrollTo = useCallback(destination => {
     active.value = destination === -SCREEN_HEIGHT / 2.2
@@ -92,89 +93,26 @@ const BottomSheet = forwardRef(({ children }, ref) => {
     // smaller divider factor => nearer to the top of the screen
     translateY.value = withSpring(-SCREEN_HEIGHT / 2, { damping: 12 })
 
-    // const fetchSightsData = async () => {
-    //   const querySnapshot = await getDocs(collection(db, 'birds'))
-    //   console.log('FETCH DATA')
-    //   querySnapshot.forEach(doc => {
-    //     console.log('DATA FETCHED')
-    //     console.log(`${doc.id} => ${doc.data()}`)
-    //   })
-    // }
-    // const exampleDoc = doc(db, 'birds', exampleDocumentName)
+    const fetchData = async () => {
+      try {
+        console.log('FETCH DATA')
+        const sightingsSnapshot = await getDocs(collection(db, 'birds'))
+        let tempData = []
+        sightingsSnapshot.forEach(doc => {
+          tempData.push(doc.data())
+        })
 
-    // getDoc(exampleDoc)
-    //   .then(snapshot => {
-    //     if (snapshot.exists) {
-    //       setExampleDoc(snapshot.data())
-    //     } else {
-    //       alert('Document Not Found.')
-    //     }
-    //   })
-    //   .catch(error => {
-    //     alert(error.message)
-    //   })
-
-    // try {
-    //   fetchSightsData()
-    // } catch (err) {
-    //   console.log('ERROR')
-    //   console.log(err)
-    // }
-    // fetchSightsData().catch(console.error)
+        setSightsData(tempData.sort((a, b) => b.rarityScore - a.rarityScore))
+      } catch (err) {
+        console.log('ERROR')
+        console.log(err)
+      }
+    }
+    fetchData()
   }, [])
 
-  const readData = () => {
-    // async function getCities(db) {
-    //   console.log('FETCH DATA')
-    //   const citiesCol = collection(db, 'sightings')
-    //   const citySnapshot = await getDocs(citiesCol)
-    //   const cityList = citySnapshot.docs.map(doc => {
-    //     console.log('DATA FETCHED')
-    //     console.log(`${doc.id} => ${doc.data()}`)
-    //     return doc.data()
-    //   })
-    //   return cityList
-    // }
-    const fetchData = async () => {
-      console.log('FETCH DATA')
-      const querySnapshot = await getDocs(collection(db, 'SightingsCollection'))
-      querySnapshot.forEach(doc => {
-        console.log('DATA FETCHED')
-        console.log(`${doc.id} => ${doc.data()}`)
-      })
-    }
-    try {
-      fetchData()
-      // db.collection('birds')
-      //   .get()
-      //   .then(querySnapshot => {
-      //     querySnapshot.forEach(doc => {
-      //       console.log(`${doc.id} => ${doc.data()}`)
-      //     })
-      //   })
-    } catch (err) {
-      console.log('ERROR')
-      console.log(err)
-    }
-  }
-
-  const sortContainer = () => {
-    return (
-      <View style={styles.filterContainer}>
-        {/* <TouchableOpacity style={sort === 0 && { marginRight: 10 }} onPress={handleSortRarest}> */}
-        <TouchableOpacity style={sort === 0 && { marginRight: 10 }} onPress={readData}>
-          <Text style={sort === 0 ? styles.activeText : styles.inactiveText}>Rarest</Text>
-          <View style={sort === 0 && styles.activeLine} />
-        </TouchableOpacity>
-        <TouchableOpacity style={sort === 1 && { marginLeft: 10 }} onPress={handleSortLatest}>
-          <Text style={sort === 1 ? styles.activeText : styles.inactiveText}>Latest</Text>
-          <View style={sort === 1 && styles.activeLine} />
-        </TouchableOpacity>
-      </View>
-    )
-  }
   const sightList = isHorizontalScroll =>
-    sights.map((sight, i) => {
+    sightsData?.map((sight, i) => {
       return (
         <SightCard
           sight={sight}
@@ -190,13 +128,14 @@ const BottomSheet = forwardRef(({ children }, ref) => {
   const handleSortRarest = () => {
     setSort(0)
     // descending rarity
-    setSights([...sights].sort((a, b) => b.rarity - a.rarity))
+    setSightsData([...sightsData].sort((a, b) => b.rarityScore - a.rarityScore))
   }
 
   const handleSortLatest = () => {
     setSort(1)
     // ascending time
-    setSights([...sights].sort((a, b) => a.createdAt - b.createdAt))
+    // setSightsData([...sightsData].sort((a, b) => a.createdAt - b.createdAt))
+    setSightsData([...sightsData].sort((a, b) => a.rarityScore - b.rarityScore))
   }
 
   return (
@@ -204,7 +143,7 @@ const BottomSheet = forwardRef(({ children }, ref) => {
       <Animated.View style={[styles.bottomSheetContainer, animateBottomSheetStyle]}>
         <View style={styles.line} />
         {/*{children}*/}
-        {sortContainer()}
+        <SortContainer sort={sort} handleSortRarest={handleSortRarest} handleSortLatest={handleSortLatest} />
 
         {isVertical ? (
           <ScrollView style={globalStyles.tripsContainer}>
@@ -244,28 +183,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     top: 12,
     borderRadius: 5,
-  },
-  filterContainer: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    marginTop: 25,
-    paddingBottom: 10,
-  },
-  activeLine: {
-    backgroundColor: '#E6998C',
-    height: 4,
-    borderRadius: 10,
-    marginTop: 5,
-    width: '75%',
-    alignSelf: 'center',
-  },
-  activeText: {
-    fontWeight: 'bold',
-    color: '#E6998C',
-  },
-  inactiveText: {
-    color: '#A4A4A4',
   },
   exploreContainer: {
     paddingVertical: 12,
