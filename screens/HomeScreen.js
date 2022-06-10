@@ -18,15 +18,15 @@ const HomeScreen = () => {
   }
 
   const handleExample = () => {
-    navigation.replace('Example')
+    navigation.navigate('Example')
   }
 
   const handleNavigateBottomDrawer = () => {
-    navigation.navigate("Explore Bottom Sheet")
+    navigation.navigate('Explore Bottom Sheet')
   }
 
   const handleExplore = () => {
-    navigation.navigate("Explore Map");
+    navigation.navigate('Explore Map')
   }
 
   return (

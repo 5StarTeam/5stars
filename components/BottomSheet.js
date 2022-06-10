@@ -11,10 +11,15 @@ import Animated, {
 } from 'react-native-reanimated'
 import { globalStyles } from '../styles/global'
 import SightCard from './sightseeing/SightCard'
+import { doc, getDocs, setDoc, deleteDoc, collection } from 'firebase/firestore'
+import app from '../core/Firebase'
+import { getFirestore } from 'firebase/firestore'
+import { async } from '@firebase/util'
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window')
 
 const BottomSheet = forwardRef(({ children }, ref) => {
+  const db = getFirestore(app)
   const translateY = useSharedValue(0)
   const active = useSharedValue(false)
   const context = useSharedValue({ y: 0 })
@@ -37,6 +42,7 @@ const BottomSheet = forwardRef(({ children }, ref) => {
       { commonName: 'luna', rarity: 5, createdAt: 37 },
     ].sort((a, b) => b.rarity - a.rarity)
   )
+  const [sightsData, setSightsData] = useState(null)
 
   const scrollTo = useCallback(destination => {
     active.value = destination === -SCREEN_HEIGHT / 2.2
@@ -57,7 +63,7 @@ const BottomSheet = forwardRef(({ children }, ref) => {
     .onUpdate(e => {
       translateY.value = Math.max(e.translationY + context.value.y, -SCREEN_HEIGHT)
       // active.value = translateY.value <= -SCREEN_HEIGHT / 2
-      setIsVertical(translateY.value <= -SCREEN_HEIGHT / 1.9)
+      setIsVertical(translateY.value <= -SCREEN_HEIGHT / 1.8)
     })
     .onEnd(() => {
       if (translateY.value > -SCREEN_HEIGHT / 2.5) {
@@ -84,13 +90,79 @@ const BottomSheet = forwardRef(({ children }, ref) => {
 
   useEffect(() => {
     // smaller divider factor => nearer to the top of the screen
-    translateY.value = withSpring(-SCREEN_HEIGHT / 2.1, { damping: 12 })
+    translateY.value = withSpring(-SCREEN_HEIGHT / 2, { damping: 12 })
+
+    // const fetchSightsData = async () => {
+    //   const querySnapshot = await getDocs(collection(db, 'birds'))
+    //   console.log('FETCH DATA')
+    //   querySnapshot.forEach(doc => {
+    //     console.log('DATA FETCHED')
+    //     console.log(`${doc.id} => ${doc.data()}`)
+    //   })
+    // }
+    // const exampleDoc = doc(db, 'birds', exampleDocumentName)
+
+    // getDoc(exampleDoc)
+    //   .then(snapshot => {
+    //     if (snapshot.exists) {
+    //       setExampleDoc(snapshot.data())
+    //     } else {
+    //       alert('Document Not Found.')
+    //     }
+    //   })
+    //   .catch(error => {
+    //     alert(error.message)
+    //   })
+
+    // try {
+    //   fetchSightsData()
+    // } catch (err) {
+    //   console.log('ERROR')
+    //   console.log(err)
+    // }
+    // fetchSightsData().catch(console.error)
   }, [])
+
+  const readData = () => {
+    // async function getCities(db) {
+    //   console.log('FETCH DATA')
+    //   const citiesCol = collection(db, 'sightings')
+    //   const citySnapshot = await getDocs(citiesCol)
+    //   const cityList = citySnapshot.docs.map(doc => {
+    //     console.log('DATA FETCHED')
+    //     console.log(`${doc.id} => ${doc.data()}`)
+    //     return doc.data()
+    //   })
+    //   return cityList
+    // }
+    const fetchData = async () => {
+      console.log('FETCH DATA')
+      const querySnapshot = await getDocs(collection(db, 'SightingsCollection'))
+      querySnapshot.forEach(doc => {
+        console.log('DATA FETCHED')
+        console.log(`${doc.id} => ${doc.data()}`)
+      })
+    }
+    try {
+      fetchData()
+      // db.collection('birds')
+      //   .get()
+      //   .then(querySnapshot => {
+      //     querySnapshot.forEach(doc => {
+      //       console.log(`${doc.id} => ${doc.data()}`)
+      //     })
+      //   })
+    } catch (err) {
+      console.log('ERROR')
+      console.log(err)
+    }
+  }
 
   const sortContainer = () => {
     return (
       <View style={styles.filterContainer}>
-        <TouchableOpacity style={sort === 0 && { marginRight: 10 }} onPress={handleSortRarest}>
+        {/* <TouchableOpacity style={sort === 0 && { marginRight: 10 }} onPress={handleSortRarest}> */}
+        <TouchableOpacity style={sort === 0 && { marginRight: 10 }} onPress={readData}>
           <Text style={sort === 0 ? styles.activeText : styles.inactiveText}>Rarest</Text>
           <View style={sort === 0 && styles.activeLine} />
         </TouchableOpacity>
