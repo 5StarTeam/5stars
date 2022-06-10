@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
 import React from 'react'
+import { AntDesign } from '@expo/vector-icons'
 import { globalStyles } from '../../styles/global'
 
 export default function SightCard({ handlePress, sight, isHorizontalScroll }) {
@@ -11,6 +12,10 @@ export default function SightCard({ handlePress, sight, isHorizontalScroll }) {
   return (
     <TouchableWithoutFeedback onPress={handlePress}>
       <View style={isHorizontalScroll ? styles.sightCardScrollContainer : styles.sightCardContainer}>
+        <View style={styles.seenWrapper}>
+          <AntDesign name="eyeo" size={20} color="white" />
+          <Text style={styles.seenText}>12</Text>
+        </View>
         <Image
           source={{ uri: sight.imageUrl ?? 'http://animal.memozee.com/ArchOLD-7/1197452567.jpg' }}
           style={globalStyles.itineraryImageSmall}
@@ -84,5 +89,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
+  },
+  seenWrapper: {
+    backgroundColor: 'rgba(0, 0, 0, 0.45)',
+    flexDirection: 'row',
+    position: 'absolute',
+    zIndex: 2,
+    borderRadius: 12,
+    paddingHorizontal: 7,
+    paddingVertical: 2,
+    alignItems: 'center',
+    right: 5,
+    top: 5,
+  },
+  seenText: {
+    color: 'white',
+    paddingLeft: 2,
   },
 })

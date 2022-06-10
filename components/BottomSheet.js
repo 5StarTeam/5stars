@@ -64,7 +64,7 @@ const BottomSheet = forwardRef(({ children }, ref) => {
     .onUpdate(e => {
       translateY.value = Math.max(e.translationY + context.value.y, -SCREEN_HEIGHT)
       // active.value = translateY.value <= -SCREEN_HEIGHT / 2
-      setIsVertical(translateY.value <= -SCREEN_HEIGHT / 1.8)
+      setIsVertical(translateY.value <= -SCREEN_HEIGHT / 1.7)
     })
     .onEnd(() => {
       if (translateY.value > -SCREEN_HEIGHT / 2.5) {
@@ -91,7 +91,7 @@ const BottomSheet = forwardRef(({ children }, ref) => {
 
   useEffect(() => {
     // smaller divider factor => nearer to the top of the screen
-    translateY.value = withSpring(-SCREEN_HEIGHT / 2, { damping: 12 })
+    translateY.value = withSpring(-SCREEN_HEIGHT / 1.8, { damping: 12 })
 
     const fetchData = async () => {
       try {
