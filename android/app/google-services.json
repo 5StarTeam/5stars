@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "625758521630",
+    "project_id": "stars-56ebb",
+    "storage_bucket": "stars-56ebb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625758521630:android:35500eb4bf6e9aa934a10f",
+        "android_client_info": {
+          "package_name": "BirdGo.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "625758521630-veim7ldrtn3nuvpaiuskni577bgemftt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHl7gKUZMB7FG6UfA0ppGMxThDtHfX_6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625758521630-veim7ldrtn3nuvpaiuskni577bgemftt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

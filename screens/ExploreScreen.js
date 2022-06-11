@@ -3,8 +3,6 @@ import { View } from 'react-native'
 import MapboxGL from '@rnmapbox/maps'
 import MarkerShapeSource from '../components/MarkerShapeSource'
 
-MapboxGL.setAccessToken(process.env.MAPBOX_ACCESSTOKEN)
-
 const ExploreScreen = () => {
   const camera = useRef()
 
