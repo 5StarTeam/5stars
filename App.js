@@ -1,3 +1,4 @@
+import 'expo-dev-client'
 import '@env'
 import React from 'react';
 import { Route } from './services/RoutingService';
