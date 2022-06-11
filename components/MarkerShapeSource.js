@@ -2,7 +2,7 @@ import React from 'react'
 import MapboxGL from '@rnmapbox/maps'
 
 const MarkerShapeSource = props => {
-  var geoJson = require('../data/sampleLarge.json')
+  var geoJson = require('../data/singapore.json')
   const icon = {
     iconImage: require('../assets/marker-red.png'),
     iconAllowOverlap: true,
