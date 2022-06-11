@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import firestore from "@react-native-firebase/firestore"
+import { useNavigation } from '@react-navigation/native'
 
 // We're performing CRUD on a single firestore document.
 const exampleCollectionName = 'ExampleCollection'
 const exampleDocumentName = 'ExampleDocument'
 const ExampleScreen = () => {
+  const navigation = useNavigation()
   const ref = firestore().collection(exampleCollectionName).doc(exampleDocumentName)
   const [exampleDoc, setExampleDoc] = useState(null)
   const [text, setText] = useState('')
