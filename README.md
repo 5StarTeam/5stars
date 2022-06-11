@@ -1,7 +1,7 @@
 # 5stars
 
 ## Setup
-### Setup Firebase configuration. 
+### Setup Firebase configuration for authentication. 
 Create /core/Firebase.js as below.
 ```JavaScript
 import { initializeApp } from "firebase/app";
@@ -39,4 +39,7 @@ In 5stars root directory, run
 expo start
 ```
 
+See react-native-firebase [API](https://rnfirebase.io/firestore/usage#usage) on how to use react-native-firebase/firestore.
+
+// TODO: Firebase android native config
 
