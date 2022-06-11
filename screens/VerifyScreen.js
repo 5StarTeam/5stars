@@ -14,21 +14,20 @@ const VerifyScreen = () => {
       .then(() => {
         navigation.replace('Login')
       })
-      .catch((error) => alert(error.message))
+      .catch(error => alert(error.message))
   }
 
   const handleResendEmail = () => {
     sendEmailVerification(auth.currentUser)
       .then(() => alert('resent verification email'))
-      .catch((error) => alert(error.message))
+      .catch(error => alert(error.message))
   }
 
   return (
     <View style={styles.container}>
       <Text>Please verify your email.</Text>
-      <Text>
-        We've sent an email to {auth.currentUser?.email} to verify your email address.
-      </Text>
+      <Text>We've sent an email to {auth.currentUser?.email} to verify your email address.</Text>
+      <Text>Please click the link in the email to verify your account to complete your registration.</Text>
       <TouchableOpacity onPress={handleResendEmail} style={styles.button}>
         <Text style={styles.buttonText}>Resend Email</Text>
       </TouchableOpacity>
@@ -61,5 +60,5 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: '700',
     fontSize: 16,
-  }
+  },
 })

@@ -11,7 +11,7 @@ export const globalStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#FFFCFC',
   },
   inputWrapper: {
     paddingHorizontal: 18,

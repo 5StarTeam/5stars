@@ -10,9 +10,17 @@ import {
   Keyboard,
 } from 'react-native'
 import { app } from '../core/Firebase'
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  sendEmailVerification,
+} from 'firebase/auth'
 import { MaterialIcons, Ionicons } from '@expo/vector-icons'
 import { globalStyles } from '../styles/global'
+import RoundButton from '../components/common/roundButton'
+import RoundButtonOutline from '../components/common/roundButtonOutline'
 // import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 
 const auth = getAuth(app)
@@ -105,15 +113,9 @@ const LoginScreen = () => {
           />
         </View>
 
-        <TouchableOpacity style={globalStyles.btnContainer} onPress={handleLogin}>
-          <Text style={globalStyles.btnText}>LOGIN</Text>
-        </TouchableOpacity>
-
+        <RoundButton text={'LOGIN'} handlePress={handleLogin} />
         <Text style={{ marginTop: 20, marginBottom: 5, color: '#AE908C' }}>New Here?</Text>
-
-        <TouchableOpacity style={globalStyles.btnContainerAlt} onPress={() => handleSignUp()}>
-          <Text style={globalStyles.btnTextAlt}>SIGN UP</Text>
-        </TouchableOpacity>
+        <RoundButtonOutline text={'SIGN UP'} handlePress={handleSignUp} />
       </View>
     </TouchableWithoutFeedback>
   )
