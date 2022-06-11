@@ -1,10 +1,21 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { View } from 'react-native'
 import MapboxGL from '@rnmapbox/maps'
 import MarkerShapeSource from '../components/MarkerShapeSource'
 
 const ExploreScreen = () => {
-  const camera = useRef()
+  MapboxGL.setAccessToken(process.env.MAPBOX_ACCESSTOKEN);
+  const camera = useRef();
+  
+  useEffect(() => {
+        const requestLocation = async () => {
+            let acc = await MapboxGL.requestAndroidLocationPermissions().then(res => res);
+            console.log(acc);
+            return acc;
+        }
+        
+        setLocationAccess(requestLocation());
+    }, []);
 
   const handlePressMarker = feature => {
     console.log('Fly to coordinates:', feature.geometry.coordinate)
@@ -25,7 +36,7 @@ const ExploreScreen = () => {
           zoomEnabled={true}
           animationMode={'flyTo'}
           animationDuration={1000}
-          centerCoordinate={[-50, 50]}
+          centerCoordinate={[103.851959, 1.290270]}
         ></MapboxGL.Camera>
       </MapboxGL.MapView>
     </View>
