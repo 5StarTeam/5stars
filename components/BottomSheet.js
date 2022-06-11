@@ -27,22 +27,6 @@ const BottomSheet = forwardRef(({ children }, ref) => {
   const [isVertical, setIsVertical] = useState(false)
   // 0 for rarest, 1 for latest
   const [sort, setSort] = useState(0)
-  // const [sights, setSights] = useState(
-  //   [
-  //     { commonName: 'alice', rarity: 5, createdAt: 20 },
-  //     { commonName: 'betty', rarity: 2, createdAt: 10 },
-  //     { commonName: 'carol', rarity: 1, createdAt: 30 },
-  //     { commonName: 'dave', rarity: 10, createdAt: 30 },
-  //     { commonName: 'elsa', rarity: 5, createdAt: 40 },
-  //     { commonName: 'felix', rarity: 6, createdAt: 50 },
-  //     { commonName: 'george', rarity: 7, createdAt: 60 },
-  //     { commonName: 'holger', rarity: 8, createdAt: 70 },
-  //     { commonName: 'ida', rarity: 9, createdAt: 80 },
-  //     { commonName: 'john', rarity: 5, createdAt: 90 },
-  //     { commonName: 'klare', rarity: 5, createdAt: 35 },
-  //     { commonName: 'luna', rarity: 5, createdAt: 37 },
-  //   ].sort((a, b) => b.rarity - a.rarity)
-  // )
   const [sightsData, setSightsData] = useState()
 
   const scrollTo = useCallback(destination => {
