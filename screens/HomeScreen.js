@@ -32,6 +32,10 @@ const HomeScreen = () => {
     navigation.navigate('Explore Map')
   }
 
+  const handleVerify = () => {
+    navigation.navigate('Verify')
+  }
+
   return (
     <View style={globalStyles.signupLoginContainer}>
       <Text>Email: {auth.currentUser?.email}</Text>
@@ -39,6 +43,7 @@ const HomeScreen = () => {
       <RectButtonOutline text={'CRUD page'} handlePress={handleExample} />
       <RectButtonOutline text={'Explore Bottom Drawer'} handlePress={handleNavigateBottomDrawer} />
       <RectButtonOutline text={'Explore Map'} handlePress={handleExplore} />
+      <RectButtonOutline text={'Verify'} handlePress={handleVerify} />
     </View>
   )
 }
