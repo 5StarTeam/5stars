@@ -5,6 +5,7 @@ import { KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View, Keyboard
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
 import { MaterialIcons, Ionicons } from '@expo/vector-icons'
 import { globalStyles } from '../styles/global'
+import { Route } from '../services/RoutingService'
 
 const auth = getAuth(app)
 
@@ -20,9 +21,9 @@ const LoginScreen = () => {
         return
       }
       if (!user.emailVerified) {
-        navigation.replace('Verify')
+        navigation.navigate(Route.VERIFY)
       } else {
-        navigation.replace('Home')
+        navigation.navigate(Route.HOME)
       }
     })
 
@@ -53,7 +54,7 @@ const LoginScreen = () => {
   return (
     <KeyboardAvoidingView
       onPress={() => Keyboard.dismiss()}
-      behavior="padding"
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={globalStyles.keyboardAvoidViewContainer}
     >
       <View style={globalStyles.signupLoginContainer}>

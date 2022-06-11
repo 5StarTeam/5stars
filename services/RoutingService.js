@@ -5,4 +5,5 @@ export const Route = {
     UPLOAD: "Upload",
     EXPLORE: "Explore",
     EXPLORE_BOTTOM_DRAWER: "Explore Bottom Drawer",
+    VERIFY: "Verify"
 }

@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/core'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { app } from '../core/Firebase'
 import { getAuth, signOut, sendEmailVerification } from 'firebase/auth'
+import { Route } from '../services/RoutingService'
 
 const auth = getAuth(app)
 
@@ -12,7 +13,7 @@ const VerifyScreen = () => {
   const handleBack = () => {
     signOut(auth)
       .then(() => {
-        navigation.replace('Login')
+        navigation.replace(Route.LOGIN)
       })
       .catch((error) => alert(error.message))
   }

@@ -13,13 +13,13 @@ const HomeScreen = () => {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        navigation.replace('Login')
+        navigation.navigate('Login')
       })
       .catch(error => alert(error.message))
   }
 
   const handleExample = () => {
-    navigation.replace('Example')
+    navigation.navigate('Example')
   }
 
   const handleNavigateBottomDrawer = () => {
@@ -31,7 +31,7 @@ const HomeScreen = () => {
   }
 
   const handleUpload = () => {
-    navigation.replace(Route.UPLOAD)
+    navigation.navigate(Route.UPLOAD)
   }
 
   return (
