@@ -2,14 +2,12 @@ import '@env'
 import React from 'react';
 import { Route } from './services/RoutingService';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import ExampleScreen from './screens/ExampleScreen'
+import LoginScreen from './screens/LoginScreen'
+import HomeScreen from './screens/HomeScreen'
+import VerifyScreen from './screens/VerifyScreen'
 import ExploreScreen from './screens/ExploreScreen'
-import ExampleScreen from './screens/ExampleScreen';
-import LoginScreen from './screens/LoginScreen';
-import HomeScreen from './screens/HomeScreen';
-import UploadScreen from './screens/UploadScreen';
-import ExploreBottomDrawer from './components/ExploreBottomDrawer'
-
 import { Provider } from 'react-redux';
 import store from './redux/store'
 
@@ -22,6 +20,7 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen options={{ headerShown: false }} name={Route.LOGIN} component={LoginScreen} />
+          <Stack.Screen name="Verify" component={VerifyScreen} />
           <Stack.Screen name={Route.HOME} component={HomeScreen} />
           <Stack.Screen name={Route.UPLOAD} component={UploadScreen} />
           <Stack.Screen name={Route.EXAMPLE} component={ExampleScreen} />

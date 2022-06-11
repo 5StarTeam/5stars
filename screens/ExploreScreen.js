@@ -3,9 +3,9 @@ import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native'
 import MapboxGL from "@rnmapbox/maps";
 
-MapboxGL.setAccessToken(process.env.MAPBOX_ACCESSTOKEN);
 
 const ExploreScreen = () => {
+    MapboxGL.setAccessToken(process.env.MAPBOX_ACCESSTOKEN);
     const navigation = useNavigation();
 
     return (
