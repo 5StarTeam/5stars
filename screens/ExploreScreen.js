@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native'
-import MapboxGL, { Camera } from "@rnmapbox/maps";
-
+import React, { useRef, useEffect } from 'react'
+import { View } from 'react-native'
+import MapboxGL from '@rnmapbox/maps'
+import MarkerShapeSource from '../components/MarkerShapeSource'
 
 const ExploreScreen = () => {
-    MapboxGL.setAccessToken(process.env.MAPBOX_ACCESSTOKEN);
-    const navigation = useNavigation();
-    const [viewPort, setViewPort] = useState({
-        zoomLevel: 10,
-        centerCoordinate: [103.851959, 1.290270]
-    });
-    const [locationAccess, setLocationAccess] = useState(false);
-
-    useEffect(() => {
+  MapboxGL.setAccessToken(process.env.MAPBOX_ACCESSTOKEN);
+  const camera = useRef();
+  
+  useEffect(() => {
         const requestLocation = async () => {
             let acc = await MapboxGL.requestAndroidLocationPermissions().then(res => res);
             console.log(acc);
@@ -22,20 +16,31 @@ const ExploreScreen = () => {
         
         setLocationAccess(requestLocation());
     }, []);
-    
 
-    return (
-        <View style={{flex: 1, height: "100%", width: "100%" }}>
-            <MapboxGL.MapView 
-                style={{ flex: 1 }}
-                zoomEnabled={true}
-            >
-                    <Camera 
-                        {...viewPort}
-                    />
-            </MapboxGL.MapView>
-        </View>
-    )
+  const handlePressMarker = feature => {
+    console.log('Fly to coordinates:', feature.geometry.coordinate)
+    camera.current.setCamera({
+      centerCoordinate: feature.geometry.coordinates,
+      zoomLevel: 14,
+      animationDuration: 700,
+    })
+  }
+
+  return (
+    <View style={{ flex: 1, height: '100%', width: '100%' }}>
+      <MapboxGL.MapView style={{ flex: 1 }} attributionEnabled={false} logoEnabled={false}>
+        <MarkerShapeSource onPressMarker={handlePressMarker}></MarkerShapeSource>
+        <MapboxGL.Camera
+          ref={camera}
+          zoomLevel={1}
+          zoomEnabled={true}
+          animationMode={'flyTo'}
+          animationDuration={1000}
+          centerCoordinate={[103.851959, 1.290270]}
+        ></MapboxGL.Camera>
+      </MapboxGL.MapView>
+    </View>
+  )
 }
 
-export default ExploreScreen;
+export default ExploreScreen

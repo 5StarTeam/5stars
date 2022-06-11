@@ -1,10 +1,19 @@
 import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
-import { KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View, Keyboard } from 'react-native'
+import {
+  KeyboardAvoidingView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+  Keyboard,
+} from 'react-native'
 import { app } from '../core/Firebase'
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
 import { MaterialIcons, Ionicons } from '@expo/vector-icons'
 import { globalStyles } from '../styles/global'
+// import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 
 const auth = getAuth(app)
 
@@ -51,7 +60,7 @@ const LoginScreen = () => {
   }
 
   return (
-    <KeyboardAvoidingView
+    <TouchableWithoutFeedback
       onPress={() => Keyboard.dismiss()}
       behavior="padding"
       style={globalStyles.keyboardAvoidViewContainer}
@@ -106,7 +115,7 @@ const LoginScreen = () => {
           <Text style={globalStyles.btnTextAlt}>SIGN UP</Text>
         </TouchableOpacity>
       </View>
-    </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   )
 }
 
