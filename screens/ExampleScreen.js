@@ -1,58 +1,61 @@
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import firestore from "@react-native-firebase/firestore"
+import { useNavigation } from '@react-navigation/native'
 
 // We're performing CRUD on a single firestore document.
 const exampleCollectionName = 'ExampleCollection'
 const exampleDocumentName = 'ExampleDocument'
 const ExampleScreen = () => {
-  const ref = firestore().collection(exampleCollectionName)
+  const navigation = useNavigation()
+  const ref = firestore().collection(exampleCollectionName).doc(exampleDocumentName)
   const [exampleDoc, setExampleDoc] = useState(null)
   const [text, setText] = useState('')
   // MARK: react-native-firebase/firestore v6 example CRUD functions
-  async function Create() {
+  const Create = () => {
+    // Setting GeoPoint values, Base64 image string, or timestamp : https://rnfirebase.io/firestore/usage#field-values
     const docData = {
       'string-field-1': 'placeholder text',
       'num-field-1': 1,
       'read-me': 'Hello World!',
     }
-    await ref.add(docData)
-    alert('Document Created!')
+    ref.set(docData)
+      .then(() => {
+        alert('Document Created!')
+      }).catch(error => {
+        alert(error.message)
+      });
   }
   const Read = () => {
-    // Read whatever document by changing the target collection and path here.
-    // You can also read entire collections: https://firebase.google.com/docs/firestore/quickstart#read_data
-    // exampleDocReference.get()
-    //   .then((snapshot) => {
-    //     if (snapshot.exists) {
-    //       setExampleDoc(snapshot.data())
-    //     } else {
-    //       alert('Document Not Found.')
-    //     }
-    //   })
-    //   .catch(error => {
-    //     alert(error.message)
-    //   })
+    // Can also listen to realtime changes: https://rnfirebase.io/firestore/usage#realtime-changes
+    // Get nested data: https://rnfirebase.io/firestore/usage#documentsnapshot
+    ref.get()
+      .then(documentSnapshot => {
+        if (documentSnapshot.exists) {
+          setExampleDoc(documentSnapshot.data())
+        }
+      }).catch(error => {
+        alert(error.message)
+      });
   }
-  const Update = (value, merge) => {
-    // exampleDocReference.set( value, { merge: merge })
-    // // If merge is true then it will merge with an existing doc, otherwise it will be a fresh one.
-    //   .then(() => {
-    //     alert('Updated Successfully!')
-    //     setText('')
-    //   })
-    //   .catch(error => {
-    //     alert(error.message)
-    //   })
+  const Update = (value) => {
+    ref.update({ 'read-me': value })
+      .then(() => {
+        alert('Updated Successfully!')
+        setText('')
+      })
+      .catch(error => {
+        alert(error.message)
+      })
   }
   const Delete = () => {
-    // exampleDocReference.delete()
-    //   .then(() => {
-    //     alert('Deleted Successfully!')
-    //   })
-    //   .catch(error => {
-    //     alert(error.message)
-    //   })
+    ref.delete()
+      .then(() => {
+        alert('Deleted Successfully!')
+      })
+      .catch(error => {
+        alert(error.message)
+      })
   }
   return (
     <View style={styles.container}>
@@ -72,12 +75,7 @@ const ExampleScreen = () => {
       <Button
         title="Update Example Doc"
         onPress={() => {
-          Update(
-            {
-              'read-me': text,
-            },
-            true
-          )
+          Update(text)
         }}
         disabled={text === ''}
       />
