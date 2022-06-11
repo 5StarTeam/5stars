@@ -23,11 +23,11 @@ const HomeScreen = () => {
   }
 
   const handleNavigateBottomDrawer = () => {
-    navigation.navigate("Explore Bottom Drawer")
+    navigation.navigate('Explore Bottom Sheet')
   }
 
   const handleExplore = () => {
-    navigation.navigate("Explore Map");
+    navigation.navigate('Explore Map')
   }
 
   const handleUpload = () => {

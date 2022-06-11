@@ -6,6 +6,7 @@ import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWith
 import { MaterialIcons, Ionicons } from '@expo/vector-icons'
 import { globalStyles } from '../styles/global'
 import { Route } from '../services/RoutingService'
+// import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 
 const auth = getAuth(app)
 
@@ -52,7 +53,7 @@ const LoginScreen = () => {
   }
 
   return (
-    <KeyboardAvoidingView
+    <TouchableWithoutFeedback
       onPress={() => Keyboard.dismiss()}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={globalStyles.keyboardAvoidViewContainer}
@@ -107,7 +108,7 @@ const LoginScreen = () => {
           <Text style={globalStyles.btnTextAlt}>SIGN UP</Text>
         </TouchableOpacity>
       </View>
-    </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   )
 }
 

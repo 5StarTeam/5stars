@@ -8,12 +8,11 @@ import ExploreBottomDrawer from './components/ExploreBottomDrawer';
 import ExampleScreen from './screens/ExampleScreen'
 import LoginScreen from './screens/LoginScreen'
 import HomeScreen from './screens/HomeScreen'
+import ExploreBottomSheet from './screens/ExploreBottomSheet'
 import VerifyScreen from './screens/VerifyScreen'
 import ExploreScreen from './screens/ExploreScreen'
 import UploadScreen from './screens/UploadScreen';
-import { Provider } from 'react-redux';
 import store from './redux/store'
-
 
 const Stack = createNativeStackNavigator()
 
@@ -27,8 +26,8 @@ export default function App() {
           <Stack.Screen name={Route.HOME} component={HomeScreen} />
           <Stack.Screen name={Route.UPLOAD} component={UploadScreen} />
           <Stack.Screen name={Route.EXAMPLE} component={ExampleScreen} />
-          <Stack.Screen name={Route.EXPLORE_BOTTOM_DRAWER} component={ExploreBottomDrawer} />
           <Stack.Screen name={Route.EXPLORE} component={ExploreScreen} />
+          <Stack.Screen name="Explore Bottom Sheet" component={ExploreBottomSheet} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
