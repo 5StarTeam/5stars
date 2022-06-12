@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   View,
   Keyboard,
+  Platform,
 } from 'react-native'
 import { app } from '../core/Firebase'
 import {
@@ -68,56 +69,54 @@ const LoginScreen = () => {
   }
 
   return (
-    <TouchableWithoutFeedback
-      onPress={() => Keyboard.dismiss()}
-      behavior="padding"
-      style={globalStyles.keyboardAvoidViewContainer}
-    >
-      <View style={globalStyles.signupLoginContainer}>
-        <Text style={globalStyles.titleText}>Login to BirdGO</Text>
-        <View style={globalStyles.inputWrapper}>
-          <View style={globalStyles.iconWrapper}>
-            <Ionicons
-              name="mail"
-              size={18}
-              color="#AE908C"
-              style={{
-                marginLeft: 2,
-              }}
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View style={globalStyles.signupLoginContainer}>
+          <Text style={globalStyles.titleText}>Login to BirdGO</Text>
+          <View style={globalStyles.inputWrapper}>
+            <View style={globalStyles.iconWrapper}>
+              <Ionicons
+                name="mail"
+                size={18}
+                color="#AE908C"
+                style={{
+                  marginLeft: 2,
+                }}
+              />
+            </View>
+            <TextInput
+              autoCapitalize="none"
+              autoComplete="email"
+              style={globalStyles.input}
+              placeholderTextColor="#AE908C"
+              placeholder="Email"
+              value={email}
+              onChangeText={value => setEmail(value)}
             />
           </View>
-          <TextInput
-            autoCapitalize="none"
-            autoComplete="email"
-            style={globalStyles.input}
-            placeholderTextColor="#AE908C"
-            placeholder="Email"
-            value={email}
-            onChangeText={value => setEmail(value)}
-          />
-        </View>
 
-        <View style={globalStyles.inputWrapper}>
-          <View style={globalStyles.iconWrapper}>
-            <MaterialIcons name="lock" size={20} color="#AE908C" />
+          <View style={globalStyles.inputWrapper}>
+            <View style={globalStyles.iconWrapper}>
+              <MaterialIcons name="lock" size={20} color="#AE908C" />
+            </View>
+            <TextInput
+              autoCapitalize="none"
+              autoComplete="password"
+              style={globalStyles.input}
+              placeholderTextColor="#AE908C"
+              placeholder="Password"
+              secureTextEntry={true}
+              value={password}
+              onChangeText={value => setPassword(value)}
+            />
           </View>
-          <TextInput
-            autoCapitalize="none"
-            autoComplete="password"
-            style={globalStyles.input}
-            placeholderTextColor="#AE908C"
-            placeholder="Password"
-            secureTextEntry={true}
-            value={password}
-            onChangeText={value => setPassword(value)}
-          />
-        </View>
 
-        <RoundButton text={'LOGIN'} handlePress={handleLogin} />
-        <Text style={{ marginTop: 20, marginBottom: 5, color: '#AE908C' }}>New Here?</Text>
-        <RoundButtonOutline text={'SIGN UP'} handlePress={handleSignUp} />
-      </View>
-    </TouchableWithoutFeedback>
+          <RoundButton text={'LOGIN'} handlePress={handleLogin} />
+          <Text style={{ marginTop: 20, marginBottom: 5, color: '#AE908C' }}>New Here?</Text>
+          <RoundButtonOutline text={'SIGN UP'} handlePress={handleSignUp} />
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   )
 }
 

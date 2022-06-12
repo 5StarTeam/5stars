@@ -18,6 +18,11 @@ const globalStyles = StyleSheet.create({
   },
   text: {
     color: textColor,
+    fontSize: 16,
+    lineHeight: 24,
+  },
+  boldText: {
+    fontWeight: 'bold',
   },
   title: {
     fontSize: 20,
@@ -211,14 +216,14 @@ const globalStyles = StyleSheet.create({
   },
   durationText: {
     color: greyColor,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     marginLeft: 3,
     marginRight: 6,
     fontSize: 14,
   },
   seenText: {
     color: primaryColor,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     marginLeft: 3,
     marginRight: 10,
     fontSize: 14,

@@ -23,7 +23,7 @@ import { doc, getDocs, setDoc, deleteDoc, collection } from 'firebase/firestore'
 import { app, db } from '../core/Firebase'
 import { getFirestore } from 'firebase/firestore'
 import { async } from '@firebase/util'
-import SortContainer from './sightseeing/sortContainer'
+import SortContainer from './sightseeing/SortContainer'
 import { useNavigation } from '@react-navigation/core'
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window')
@@ -112,7 +112,7 @@ const BottomSheet = forwardRef(({ children }, ref) => {
           sight={sight}
           handlePress={() => {
             navigation.navigate('Bird Details', {
-              sight: sight,
+              initialSight: sight,
             })
           }}
           key={sight.commonName}

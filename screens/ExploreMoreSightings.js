@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, ScrollView, StyleSheet } from 'react-native'
 import SightCard from '../components/sightseeing/SightCard'
-import SortContainer from '../components/sightseeing/sortContainer'
+import SortContainer from '../components/sightseeing/SortContainer'
 import { globalStyles } from '../styles/global'
 
 function ExploreMoreSightings({ route, navigation }) {
