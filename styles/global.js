@@ -13,6 +13,9 @@ export const globalStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFCFC',
   },
+  text: {
+    color: textColor,
+  },
   inputWrapper: {
     paddingHorizontal: 18,
     borderRadius: 30,
