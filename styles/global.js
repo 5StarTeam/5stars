@@ -2,11 +2,13 @@ import { StyleSheet } from 'react-native'
 
 const inputBg = '#FBEFED'
 const textColor = '#68433D'
+const captionColor = '#BD918A'
 const placeholderColor = '#AE908C'
 const primaryColor = '#E6998C'
 const containerBgColor = '#FFFCFC'
+const greyColor = '#A3B3C5'
 
-export const globalStyles = StyleSheet.create({
+const globalStyles = StyleSheet.create({
   signupLoginContainer: {
     padding: '10%',
     justifyContent: 'center',
@@ -16,6 +18,15 @@ export const globalStyles = StyleSheet.create({
   },
   text: {
     color: textColor,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: textColor,
+    marginBottom: 5,
+  },
+  caption: {
+    color: captionColor,
   },
   inputWrapper: {
     paddingHorizontal: 18,
@@ -110,15 +121,15 @@ export const globalStyles = StyleSheet.create({
   btnText: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 16,
   },
   btnTextAlt: {
     color: primaryColor,
-    fontSize: 18,
+    fontSize: 16,
   },
   btnLogoutText: {
     color: '#E46767',
-    fontSize: 18,
+    fontSize: 16,
   },
   passwordHint: {
     fontSize: 10,
@@ -199,10 +210,17 @@ export const globalStyles = StyleSheet.create({
     fontSize: 14,
   },
   durationText: {
-    color: '#A3B3C5',
+    color: greyColor,
     fontWeight: 'bold',
     marginLeft: 3,
     marginRight: 6,
+    fontSize: 14,
+  },
+  seenText: {
+    color: primaryColor,
+    fontWeight: 'bold',
+    marginLeft: 3,
+    marginRight: 10,
     fontSize: 14,
   },
   costText: {
@@ -223,4 +241,12 @@ export const globalStyles = StyleSheet.create({
     justifyContent: 'space-between',
     // width: "100%",
   },
+  containerStd: {
+    flex: 1,
+    paddingHorizontal: 15,
+    paddingVertical: 15,
+    backgroundColor: containerBgColor,
+  },
 })
+
+export { inputBg, textColor, primaryColor, captionColor, containerBgColor, placeholderColor, greyColor, globalStyles }

@@ -111,7 +111,9 @@ const BottomSheet = forwardRef(({ children }, ref) => {
         <SightCard
           sight={sight}
           handlePress={() => {
-            console.log(sight)
+            navigation.navigate('Bird Details', {
+              sight: sight,
+            })
           }}
           key={sight.commonName}
           isHorizontalScroll={isHorizontalScroll}

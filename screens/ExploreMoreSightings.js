@@ -28,7 +28,9 @@ function ExploreMoreSightings({ route, navigation }) {
         <SightCard
           sight={sight}
           handlePress={() => {
-            console.log(sight)
+            navigation.navigate('Bird Details', {
+              sight: sight,
+            })
           }}
           key={sight.commonName}
           isHorizontalScroll={false}
