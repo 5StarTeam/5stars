@@ -29,7 +29,6 @@ import { useNavigation } from '@react-navigation/core'
 const { height: SCREEN_HEIGHT } = Dimensions.get('window')
 
 const BottomSheet = forwardRef(({ children }, ref) => {
-  // const db = getFirestore(app)
   const translateY = useSharedValue(0)
   const active = useSharedValue(false)
   const context = useSharedValue({ y: 0 })

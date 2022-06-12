@@ -8,15 +8,27 @@ import RectButton from '../components/common/rectButton'
 
 const BirdDetails = ({ route, navigation }) => {
   // useState(route.params.initialSight) is the data from bottom sheet where the sight card is clicked
-  const [sight, setSight] = useState({
-    category: 'A',
-    commonName: 'Chestnut-cheeked Starling',
-    imageUrl: 'https://static.thainationalparks.com/img/species/wiki/2013/07/09/7841/sturnus-philippensis-w-900.jpg',
-    localStatus: 'Very rare vagrant',
-    rarity: 'Rarity',
-    rarityScore: 15,
-    wikiUrl: 'https://en.wikipedia.org/wiki/Chestnut-cheeked_Starling',
-  })
+  const [sight, setSight] = useState(
+    route?.params?.initialSight ?? {
+      category: 'A',
+      commonName: 'Chestnut-cheeked Starling',
+      imageUrl: 'https://static.thainationalparks.com/img/species/wiki/2013/07/09/7841/sturnus-philippensis-w-900.jpg',
+      localStatus: 'Very rare vagrant',
+      rarity: 'Rarity',
+      rarityScore: 15,
+      wikiUrl: 'https://en.wikipedia.org/wiki/Chestnut-cheeked_Starling',
+    }
+  )
+  // const [sight, setSight] = useState({
+  //   category: 'A',
+  //   commonName: 'Chestnut-cheeked Starling',
+  //   imageUrl: 'https://static.thainationalparks.com/img/species/wiki/2013/07/09/7841/sturnus-philippensis-w-900.jpg',
+  //   localStatus: 'Very rare vagrant',
+  //   rarity: 'Rarity',
+  //   rarityScore: 15,
+  //   wikiUrl: 'https://en.wikipedia.org/wiki/Chestnut-cheeked_Starling',
+  // })
+
   const [galleryImgs, setGalleryImgs] = useState([
     {
       imgUrl: 'https://static.thainationalparks.com/img/species/wiki/2013/07/09/7841/sturnus-philippensis-w-900.jpg',
@@ -86,6 +98,14 @@ const BirdDetails = ({ route, navigation }) => {
       isDownvoted: false,
       profilePic:
         'https://w0.peakpx.com/wallpaper/128/961/HD-wallpaper-note10-funny-ii-bird-birds-cartoon-little-thumbnail.jpg',
+    },
+    {
+      username: 'John Doe',
+      comment: 'The bird was resting on a very very tall tree.',
+      date: '2022-06-09',
+      isUpvoted: false,
+      isDownvoted: true,
+      profilePic: 'https://en.pimg.jp/056/575/464/1/56575464.jpg',
     },
     {
       username: 'John Doe',
