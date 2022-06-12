@@ -13,6 +13,7 @@ import ExploreScreen from './screens/ExploreScreen'
 
 import { Provider } from 'react-redux'
 import store from './redux/store'
+import ExploreMoreSightings from './screens/ExploreMoreSightings'
 
 const Stack = createNativeStackNavigator()
 
@@ -26,6 +27,7 @@ export default function App() {
           <Stack.Screen name="Verify" component={VerifyScreen} />
           <Stack.Screen name="Example" component={ExampleScreen} />
           <Stack.Screen name="Explore Bottom Sheet" component={ExploreBottomSheet} />
+          <Stack.Screen name="Explore More Sightings" component={ExploreMoreSightings} />
           <Stack.Screen name="Explore Map" component={ExploreScreen} />
         </Stack.Navigator>
       </NavigationContainer>

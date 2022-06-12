@@ -4,6 +4,7 @@ const inputBg = '#FBEFED'
 const textColor = '#68433D'
 const placeholderColor = '#AE908C'
 const primaryColor = '#E6998C'
+const containerBgColor = '#FFFCFC'
 
 export const globalStyles = StyleSheet.create({
   signupLoginContainer: {
@@ -11,7 +12,7 @@ export const globalStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    backgroundColor: '#FFFCFC',
+    backgroundColor: containerBgColor,
   },
   text: {
     color: textColor,
@@ -124,7 +125,7 @@ export const globalStyles = StyleSheet.create({
     color: '#808080',
     paddingHorizontal: '3%',
   },
-  tripsContainer: {
+  exploreViewContainer: {
     paddingVertical: 5,
     paddingHorizontal: 10,
     flex: 1,
@@ -180,6 +181,7 @@ export const globalStyles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    backgroundColor: containerBgColor,
   },
   exploreSightsScrollContainer: {
     flexWrap: 'wrap',
