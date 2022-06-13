@@ -85,7 +85,7 @@ const BottomSheet = forwardRef(({ children }, ref) => {
 
   useEffect(() => {
     // smaller divider factor => nearer to the top of the screen
-    translateY.value = withSpring(-SCREEN_HEIGHT / 1.8, { damping: 12 })
+    translateY.value = withSpring(-SCREEN_HEIGHT / 1.9, { damping: 12 })
 
     const fetchData = async () => {
       try {
@@ -165,12 +165,8 @@ const styles = StyleSheet.create({
     height: 4,
     backgroundColor: '#E5D7D5',
     alignSelf: 'center',
-    top: 12,
+    top: 10,
     borderRadius: 5,
-  },
-  exploreContainer: {
-    paddingVertical: 12,
-    paddingHorizontal: 15,
   },
 })
 

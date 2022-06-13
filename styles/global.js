@@ -46,12 +46,12 @@ const globalStyles = StyleSheet.create({
     marginRight: 7,
     paddingVertical: 13,
     justifyContent: 'center',
-    alignItems: 'center',
   },
   input: {
     paddingVertical: 13,
     color: textColor,
     width: '86%',
+    alignSelf: 'center',
   },
   titleText: {
     fontSize: 28,
