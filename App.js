@@ -19,6 +19,7 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { containerBgColor, textColor } from './styles/global'
 import ProfileScreen from './screens/ProfileScreen'
 import EditProfileScreen from './screens/EditProfileScreen'
+import UploadSightingScreen from './screens/UploadSightingScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -44,6 +45,7 @@ export default function App() {
           <Stack.Screen name="Explore Map" component={ExploreScreen} />
           <Stack.Screen name="Profile" component={ProfileScreen} />
           <Stack.Screen name="Edit Profile" component={EditProfileScreen} />
+          <Stack.Screen name="Upload Sighting" component={UploadSightingScreen} />
           <Stack.Screen
             name="Bird Details"
             component={BirdDetails}

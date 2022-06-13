@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Pressable,
+  Platform,
 } from 'react-native'
 import React, { useState } from 'react'
 
@@ -36,7 +37,10 @@ const EditProfileScreen = ({ navigation }) => {
   }
 
   return (
-    <KeyboardAvoidingView style={globalStyles.profileSetupContainer}>
+    <KeyboardAvoidingView
+      style={globalStyles.profileSetupContainer}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={{ width: '100%', alignItems: 'center' }}>
           <Pressable onPress={handleChangeProfilePic}>

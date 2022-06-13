@@ -48,6 +48,10 @@ const HomeScreen = () => {
     navigation.navigate('Edit Profile')
   }
 
+  const handleUploadSighting = () => {
+    navigation.navigate('Upload Sighting')
+  }
+
   return (
     <View style={globalStyles.signupLoginContainer}>
       <Text>Email: {auth.currentUser?.email}</Text>
@@ -59,6 +63,7 @@ const HomeScreen = () => {
       <RectButtonOutline text={'Bird Details'} handlePress={handleBirdDetails} />
       <RectButtonOutline text={'Profile'} handlePress={handleProfile} />
       <RectButtonOutline text={'Edit Profile'} handlePress={handleEditProfile} />
+      <RectButtonOutline text={'Upload Sighting'} handlePress={handleUploadSighting} />
     </View>
   )
 }

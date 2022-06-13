@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   View,
   StyleSheet,
+  Platform,
 } from 'react-native'
 import MapboxGL from '@rnmapbox/maps'
 import MarkerShapeSource from '../components/MarkerShapeSource'
@@ -41,7 +42,7 @@ const ExploreScreen = () => {
   }
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }}>
+    <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={{ flex: 1 }}>
         <View style={{ flex: 0.55 }}>
           <ExploreTop />
