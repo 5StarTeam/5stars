@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { View, ScrollView, StyleSheet } from 'react-native'
 import SightCard from '../components/sightseeing/SightCard'
+import SightsList from '../components/sightseeing/SightsList'
 import SortContainer from '../components/sightseeing/SortContainer'
 import { globalStyles } from '../styles/global'
 
@@ -22,28 +23,10 @@ function ExploreMoreSightings({ route, navigation }) {
     setSightsData([...sightsData].sort((a, b) => a.rarityScore - b.rarityScore))
   }
 
-  const sightList = () =>
-    sightsData?.map((sight, i) => {
-      return (
-        <SightCard
-          sight={sight}
-          handlePress={() => {
-            navigation.navigate('Bird Details', {
-              sight: sight,
-            })
-          }}
-          key={sight.commonName}
-          isHorizontalScroll={false}
-        />
-      )
-    })
-
   return (
     <View style={styles.container}>
       <SortContainer sort={sort} handleSortRarest={handleSortRarest} handleSortLatest={handleSortLatest} />
-      <ScrollView style={globalStyles.exploreViewContainer}>
-        <View style={globalStyles.exploreSightsContainer}>{sightList()}</View>
-      </ScrollView>
+      <SightsList sightsData={sightsData} isHorizontalScroll={false} />
     </View>
   )
 }

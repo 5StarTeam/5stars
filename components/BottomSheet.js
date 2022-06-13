@@ -25,6 +25,7 @@ import { getFirestore } from 'firebase/firestore'
 import { async } from '@firebase/util'
 import SortContainer from './sightseeing/SortContainer'
 import { useNavigation } from '@react-navigation/core'
+import SightsList from './sightseeing/SightsList'
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window')
 
@@ -102,23 +103,11 @@ const BottomSheet = forwardRef(({ children }, ref) => {
       }
     }
     fetchData()
+    return () => {
+      console.log('unmount bottom sheet')
+      setSightsData([])
+    }
   }, [])
-
-  const sightList = isHorizontalScroll =>
-    sightsData?.map((sight, i) => {
-      return (
-        <SightCard
-          sight={sight}
-          handlePress={() => {
-            navigation.navigate('Bird Details', {
-              initialSight: sight,
-            })
-          }}
-          key={sight.commonName}
-          isHorizontalScroll={isHorizontalScroll}
-        />
-      )
-    })
 
   const handleSortRarest = () => {
     setSort(0)
@@ -148,16 +137,7 @@ const BottomSheet = forwardRef(({ children }, ref) => {
         </TouchableWithoutFeedback>
         {/*{children}*/}
         <SortContainer sort={sort} handleSortRarest={handleSortRarest} handleSortLatest={handleSortLatest} />
-
-        {isVertical ? (
-          <ScrollView style={globalStyles.exploreViewContainer}>
-            <View style={globalStyles.exploreSightsContainer}>{sightList(false)}</View>
-          </ScrollView>
-        ) : (
-          <ScrollView style={globalStyles.exploreViewContainer} horizontal={true}>
-            <View style={globalStyles.exploreSightsScrollContainer}>{sightList(true)}</View>
-          </ScrollView>
-        )}
+        <SightsList sightsData={sightsData} isHorizontalScroll={!isVertical} />
       </Animated.View>
     </GestureDetector>
   )

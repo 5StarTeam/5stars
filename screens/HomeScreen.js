@@ -40,6 +40,10 @@ const HomeScreen = () => {
     navigation.navigate('Bird Details')
   }
 
+  const handleProfile = () => {
+    navigation.navigate('Profile')
+  }
+
   return (
     <View style={globalStyles.signupLoginContainer}>
       <Text>Email: {auth.currentUser?.email}</Text>
@@ -49,6 +53,7 @@ const HomeScreen = () => {
       <RectButtonOutline text={'Explore Map'} handlePress={handleExplore} />
       <RectButtonOutline text={'Verify'} handlePress={handleVerify} />
       <RectButtonOutline text={'Bird Details'} handlePress={handleBirdDetails} />
+      <RectButtonOutline text={'Profile'} handlePress={handleProfile} />
     </View>
   )
 }
