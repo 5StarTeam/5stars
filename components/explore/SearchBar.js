@@ -1,14 +1,63 @@
-import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+  ScrollView,
+  FlatList,
+} from 'react-native'
 import React, { useState } from 'react'
-import { containerBgColor, globalStyles } from '../../styles/global'
-import { Ionicons } from '@expo/vector-icons'
+import { captionColor, containerBgColor, globalStyles, inputBg } from '../../styles/global'
+import { Entypo, Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
+import SearchItem from './SearchItem'
 
 const screenWidth = Dimensions.get('screen').width
+const sampleData = [
+  { commonName: 'Shikra' },
+  { commonName: 'Shikra1' },
+  { commonName: 'Shikra2' },
+  { commonName: 'Shikra3' },
+  { commonName: 'Bird' },
+  { commonName: 'eagle' },
+  { commonName: 'hawk' },
+  { commonName: 'duck' },
+  { commonName: 'goose' },
+  { commonName: 'geese' },
+  { commonName: 'swan' },
+  { commonName: 'chicken' },
+  { commonName: 'turkey' },
+]
 
 const SearchBar = () => {
   const navigation = useNavigation()
   const [searchInput, setSearchInput] = useState('')
+  const [filteredData, setFilteredData] = useState([])
+
+  const handleFilter = value => {
+    setSearchInput(value)
+    const filteredData = sampleData.filter(d => d.commonName.toLowerCase().includes(value.toLowerCase()))
+
+    if (value === '') {
+      setFilteredData([])
+    } else {
+      setFilteredData(filteredData)
+    }
+  }
+
+  /* <ScrollView style={[styles.searchResultContainer, { borderWidth: filteredData.length === 0 ? 0 : 0.5 }]}>
+          {filteredData.map((item, i) => (
+            <SearchItem key={item.commonName} item={item.commonName} />
+          ))}
+        </ScrollView> */
+
+  const renderSearchItem = ({ item }) => {
+    return <SearchItem item={item} />
+  }
 
   return (
     <View style={styles.searchbarContainer}>
@@ -21,7 +70,7 @@ const SearchBar = () => {
           placeholderTextColor="#AE908C"
           placeholder="Search for a bird"
           value={searchInput}
-          onChangeText={value => setSearchInput(value)}
+          onChangeText={handleFilter}
           style={[globalStyles.text, { fontSize: 14 }]}
         />
       </View>
@@ -33,6 +82,37 @@ const SearchBar = () => {
           style={styles.profilePic}
         />
       </TouchableOpacity>
+      {searchInput !== '' && (
+        <TouchableWithoutFeedback onPress={() => setSearchInput('')}>
+          <Entypo name="cross" size={19} color="#AE908C" style={styles.cancelIcon} />
+        </TouchableWithoutFeedback>
+      )}
+
+      {searchInput !== '' && (
+        /* <ScrollView style={[styles.searchResultContainer, { borderWidth: filteredData.length === 0 ? 0 : 0.5 }]}>
+          {filteredData.map((item, i) => (
+            <SearchItem key={item.commonName} item={item} />
+          ))}
+        </ScrollView> */
+        <FlatList
+          data={filteredData}
+          keyExtractor={item => item.commonName}
+          renderItem={renderSearchItem}
+          // horizontal={true}
+          // showsVerticalScrollIndicator={false}
+          // showsHorizontalScrollIndicator={false}
+          style={[styles.searchResultContainer, { borderWidth: filteredData.length === 0 ? 0 : 0.5 }]}
+        />
+      )}
+      <FlatList
+        data={sampleData}
+        keyExtractor={item => item.commonName}
+        renderItem={renderSearchItem}
+        // horizontal={true}
+        // showsVerticalScrollIndicator={false}
+        // showsHorizontalScrollIndicator={false}
+        style={[styles.searchResultContainer, { borderWidth: filteredData.length === 0 ? 0 : 0.5 }]}
+      />
     </View>
   )
 }
@@ -58,7 +138,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
     elevation: 8,
     marginRight: 10,
-    zIndex: 3,
+    zIndex: 9,
   },
   iconWrapper: {
     marginRight: 7,
@@ -75,5 +155,20 @@ const styles = StyleSheet.create({
     zIndex: 9,
     position: 'absolute',
     right: 5,
+  },
+  cancelIcon: {
+    // paddingVertical: 13,
+    position: 'absolute',
+    right: 40,
+  },
+  searchResultContainer: {
+    height: 200,
+    width: '100%',
+    borderColor: inputBg,
+    borderRadius: 15,
+    position: 'absolute',
+    top: 45,
+    backgroundColor: containerBgColor,
+    zIndex: 999,
   },
 })

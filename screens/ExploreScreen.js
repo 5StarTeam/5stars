@@ -63,7 +63,7 @@ const ExploreScreen = () => {
           <TouchableOpacity style={[styles.bottomBtnWrapper, styles.targetBtn]}>
             <MaterialCommunityIcons name="target" size={35} color={'#A66155'} />
           </TouchableOpacity>
-          <BottomSheet ref={bottomSheet} />
+          {/* <BottomSheet ref={bottomSheet} /> */}
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
