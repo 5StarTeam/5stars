@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View, Image, Dimensions, FlatList } from 'react-native'
+import { StyleSheet, Text, View, Image, Dimensions, FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { globalStyles } from '../../styles/global'
 import { Feather, FontAwesome5, SimpleLineIcons } from '@expo/vector-icons'
 
 const screenWidth = Dimensions.get('screen').width
-const ProfileTop = ({ user }) => {
+const ProfileTop = ({ user, handleEditProfile }) => {
   const renderAchievements = ({ item }) => {
     return (
       <View style={styles.achievementWrapper}>
@@ -21,7 +21,9 @@ const ProfileTop = ({ user }) => {
         <View>
           <View style={styles.editWrapper}>
             <Text style={globalStyles.title}>{user.username}</Text>
-            <FontAwesome5 name="pen" size={18} color="#B49E9B" />
+            <TouchableOpacity onPress={handleEditProfile}>
+              <FontAwesome5 name="pen" size={18} color="#B49E9B" />
+            </TouchableOpacity>
           </View>
           <View style={styles.flexRow}>
             <FontAwesome5 name="instagram" size={20} color="#C13584" />

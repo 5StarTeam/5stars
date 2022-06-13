@@ -83,9 +83,12 @@ const ProfileScreen = ({ route, navigation }) => {
     })
   }, [navigation])
 
+  const handleEditProfile = () => {
+    navigation.navigate('Edit Profile')
+  }
   return (
     <ScrollView style={globalStyles.containerStd}>
-      <ProfileTop user={user} />
+      <ProfileTop user={user} handleEditProfile={handleEditProfile} />
       <View>
         <Text style={globalStyles.title}>My Sightings</Text>
         <SightsList isHorizontalScroll={false} sightsData={sightsData} />
@@ -95,5 +98,3 @@ const ProfileScreen = ({ route, navigation }) => {
 }
 
 export default ProfileScreen
-
-const styles = StyleSheet.create({})

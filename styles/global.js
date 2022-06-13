@@ -154,9 +154,9 @@ const globalStyles = StyleSheet.create({
     alignItems: 'center',
   },
   profileSetupContainer: {
-    backgroundColor: '#FFFAFA',
+    backgroundColor: containerBgColor,
     justifyContent: 'center',
-    paddingHorizontal: 50,
+    paddingHorizontal: '10%',
     flex: 1,
     alignItems: 'center',
   },
