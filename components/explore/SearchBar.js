@@ -9,6 +9,7 @@ import {
   View,
   ScrollView,
   FlatList,
+  KeyboardAvoidingView,
 } from 'react-native'
 import React, { useState } from 'react'
 import { captionColor, containerBgColor, globalStyles, inputBg } from '../../styles/global'
@@ -36,7 +37,7 @@ const sampleData = [
 const SearchBar = () => {
   const navigation = useNavigation()
   const [searchInput, setSearchInput] = useState('')
-  const [filteredData, setFilteredData] = useState([])
+  const [filteredData, setFilteredData] = useState(sampleData)
 
   const handleFilter = value => {
     setSearchInput(value)
@@ -49,70 +50,54 @@ const SearchBar = () => {
     }
   }
 
-  /* <ScrollView style={[styles.searchResultContainer, { borderWidth: filteredData.length === 0 ? 0 : 0.5 }]}>
-          {filteredData.map((item, i) => (
-            <SearchItem key={item.commonName} item={item.commonName} />
-          ))}
-        </ScrollView> */
+  const handleNavigate = name => {
+    console.log('navigate bird details: ' + name)
+    // navigation.navigate('Bird Details')
+  }
 
   const renderSearchItem = ({ item }) => {
-    return <SearchItem item={item} />
+    return <SearchItem item={item} handlePress={() => handleNavigate(item.commonName)} />
   }
 
   return (
-    <View style={styles.searchbarContainer}>
-      <View style={{ flexDirection: 'row' }}>
-        <View style={styles.iconWrapper}>
-          <Ionicons name="search" size={18} color="#AE908C" />
+    <View style={styles.searchbarWrapper}>
+      <View style={styles.searchbarContainer}>
+        <View style={{ flexDirection: 'row' }}>
+          <View style={styles.iconWrapper}>
+            <Ionicons name="search" size={18} color="#AE908C" />
+          </View>
+          <TextInput
+            autoCapitalize="none"
+            placeholderTextColor="#AE908C"
+            placeholder="Search for a bird"
+            value={searchInput}
+            onChangeText={handleFilter}
+            style={[globalStyles.text, { fontSize: 14 }]}
+          />
         </View>
-        <TextInput
-          autoCapitalize="none"
-          placeholderTextColor="#AE908C"
-          placeholder="Search for a bird"
-          value={searchInput}
-          onChangeText={handleFilter}
-          style={[globalStyles.text, { fontSize: 14 }]}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={styles.profilePicWrapper}>
+          <Image
+            source={{
+              uri: 'https://i.guim.co.uk/img/media/97ef1652ca36d1c2e553628ffca8cf95e6d01c03/470_814_4479_2688/master/4479.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=0db16315b50eb20f7325a1e8920afd08',
+            }}
+            style={styles.profilePic}
+          />
+        </TouchableOpacity>
+        {searchInput !== '' && (
+          <TouchableWithoutFeedback onPress={() => setSearchInput('')}>
+            <Entypo name="cross" size={19} color="#AE908C" style={styles.cancelIcon} />
+          </TouchableWithoutFeedback>
+        )}
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={styles.profilePicWrapper}>
-        <Image
-          source={{
-            uri: 'https://i.guim.co.uk/img/media/97ef1652ca36d1c2e553628ffca8cf95e6d01c03/470_814_4479_2688/master/4479.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=0db16315b50eb20f7325a1e8920afd08',
-          }}
-          style={styles.profilePic}
-        />
-      </TouchableOpacity>
       {searchInput !== '' && (
-        <TouchableWithoutFeedback onPress={() => setSearchInput('')}>
-          <Entypo name="cross" size={19} color="#AE908C" style={styles.cancelIcon} />
-        </TouchableWithoutFeedback>
-      )}
-
-      {searchInput !== '' && (
-        /* <ScrollView style={[styles.searchResultContainer, { borderWidth: filteredData.length === 0 ? 0 : 0.5 }]}>
-          {filteredData.map((item, i) => (
-            <SearchItem key={item.commonName} item={item} />
-          ))}
-        </ScrollView> */
         <FlatList
           data={filteredData}
           keyExtractor={item => item.commonName}
           renderItem={renderSearchItem}
-          // horizontal={true}
           // showsVerticalScrollIndicator={false}
-          // showsHorizontalScrollIndicator={false}
           style={[styles.searchResultContainer, { borderWidth: filteredData.length === 0 ? 0 : 0.5 }]}
         />
       )}
-      <FlatList
-        data={sampleData}
-        keyExtractor={item => item.commonName}
-        renderItem={renderSearchItem}
-        // horizontal={true}
-        // showsVerticalScrollIndicator={false}
-        // showsHorizontalScrollIndicator={false}
-        style={[styles.searchResultContainer, { borderWidth: filteredData.length === 0 ? 0 : 0.5 }]}
-      />
     </View>
   )
 }
@@ -120,6 +105,14 @@ const SearchBar = () => {
 export default SearchBar
 
 const styles = StyleSheet.create({
+  searchbarWrapper: {
+    zIndex: 9,
+    width: screenWidth - 70,
+    borderRadius: 40,
+    paddingHorizontal: 15,
+    height: 190,
+    // backgroundColor: '#000',
+  },
   searchbarContainer: {
     flexDirection: 'row',
     backgroundColor: containerBgColor,
@@ -138,7 +131,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
     elevation: 8,
     marginRight: 10,
-    zIndex: 9,
+    position: 'absolute',
+    top: 0,
   },
   iconWrapper: {
     marginRight: 7,
@@ -152,23 +146,20 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
   profilePicWrapper: {
-    zIndex: 9,
     position: 'absolute',
     right: 5,
   },
   cancelIcon: {
-    // paddingVertical: 13,
     position: 'absolute',
     right: 40,
   },
   searchResultContainer: {
-    height: 200,
+    maxHeight: 150,
     width: '100%',
     borderColor: inputBg,
     borderRadius: 15,
     position: 'absolute',
-    top: 45,
+    top: 42,
     backgroundColor: containerBgColor,
-    zIndex: 999,
   },
 })

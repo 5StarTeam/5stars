@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
     zIndex: 2,
     paddingHorizontal: 10,
     flexDirection: 'row',
-    alignItems: 'center',
   },
   reloadWrapper: {
     backgroundColor: '#A66155',
@@ -44,6 +43,5 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
     elevation: 8,
     marginRight: 10,
-    zIndex: 3,
   },
 })

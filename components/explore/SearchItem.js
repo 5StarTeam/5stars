@@ -3,18 +3,13 @@ import React from 'react'
 import { captionColor, globalStyles } from '../../styles/global'
 import { useNavigation } from '@react-navigation/native'
 
-export default function SearchItem({ item }) {
+export default function SearchItem({ item, handlePress }) {
   // const navigation = useNavigation()
 
-  const handleNavigate = () => {
-    console.log('navigate bird details: ' + item.commonName)
-    // navigation.navigate('Bird Details')
-  }
-
   return (
-    <TouchableWithoutFeedback onPress={handleNavigate}>
+    <TouchableWithoutFeedback onPress={handlePress}>
       <View style={styles.searchItem}>
-        <Text style={globalStyles.text}>{item.commonName}</Text>
+        <Text style={[globalStyles.text, { fontSize: 14, lineHeight: 18 }]}>{item.commonName}</Text>
       </View>
     </TouchableWithoutFeedback>
   )
@@ -23,8 +18,10 @@ export default function SearchItem({ item }) {
 const styles = StyleSheet.create({
   searchItem: {
     paddingVertical: 10,
-    paddingHorizontal: 10,
+    paddingHorizontal: 5,
     borderBottomColor: captionColor,
     borderBottomWidth: 0.5,
+    width: '95%',
+    alignSelf: 'center',
   },
 })
