@@ -1,5 +1,13 @@
 import React, { useCallback, useEffect, forwardRef, useImperativeHandle, useState } from 'react'
-import { View, StyleSheet, Dimensions, TouchableOpacity, Text, ScrollView } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  Text,
+  ScrollView,
+  TouchableWithoutFeedback,
+} from 'react-native'
 import { Gesture } from 'react-native-gesture-handler'
 import { GestureDetector } from 'react-native-gesture-handler/src/handlers/gestures/GestureDetector'
 import Animated, {
@@ -15,19 +23,20 @@ import { doc, getDocs, setDoc, deleteDoc, collection } from 'firebase/firestore'
 import { app, db } from '../core/Firebase'
 import { getFirestore } from 'firebase/firestore'
 import { async } from '@firebase/util'
-import SortContainer from './sightseeing/sortContainer'
+import SortContainer from './sightseeing/SortContainer'
+import { useNavigation } from '@react-navigation/core'
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window')
 
 const BottomSheet = forwardRef(({ children }, ref) => {
-  // const db = getFirestore(app)
   const translateY = useSharedValue(0)
   const active = useSharedValue(false)
   const context = useSharedValue({ y: 0 })
   const [isVertical, setIsVertical] = useState(false)
   // 0 for rarest, 1 for latest
   const [sort, setSort] = useState(0)
-  const [sightsData, setSightsData] = useState()
+  const [sightsData, setSightsData] = useState([])
+  const navigation = useNavigation()
 
   const scrollTo = useCallback(destination => {
     active.value = destination === -SCREEN_HEIGHT / 2.2
@@ -101,7 +110,9 @@ const BottomSheet = forwardRef(({ children }, ref) => {
         <SightCard
           sight={sight}
           handlePress={() => {
-            console.log(sight)
+            navigation.navigate('Bird Details', {
+              initialSight: sight,
+            })
           }}
           key={sight.commonName}
           isHorizontalScroll={isHorizontalScroll}
@@ -122,19 +133,28 @@ const BottomSheet = forwardRef(({ children }, ref) => {
     setSightsData([...sightsData].sort((a, b) => a.rarityScore - b.rarityScore))
   }
 
+  const handleMoreSightings = () => {
+    navigation.navigate('Explore More Sightings', {
+      initialSightsData: sightsData ?? [],
+      initialSort: sort ?? 0,
+    })
+  }
+
   return (
     <GestureDetector gesture={gesture}>
       <Animated.View style={[styles.bottomSheetContainer, animateBottomSheetStyle]}>
-        <View style={styles.line} />
+        <TouchableWithoutFeedback onPress={handleMoreSightings}>
+          <View style={styles.line}></View>
+        </TouchableWithoutFeedback>
         {/*{children}*/}
         <SortContainer sort={sort} handleSortRarest={handleSortRarest} handleSortLatest={handleSortLatest} />
 
         {isVertical ? (
-          <ScrollView style={globalStyles.tripsContainer}>
+          <ScrollView style={globalStyles.exploreViewContainer}>
             <View style={globalStyles.exploreSightsContainer}>{sightList(false)}</View>
           </ScrollView>
         ) : (
-          <ScrollView style={globalStyles.tripsContainer} horizontal={true}>
+          <ScrollView style={globalStyles.exploreViewContainer} horizontal={true}>
             <View style={globalStyles.exploreSightsScrollContainer}>{sightList(true)}</View>
           </ScrollView>
         )}
