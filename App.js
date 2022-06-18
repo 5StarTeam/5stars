@@ -15,8 +15,11 @@ import { Provider } from 'react-redux'
 import store from './redux/store'
 import ExploreMoreSightings from './screens/ExploreMoreSightings'
 import BirdDetails from './screens/BirdDetails'
-import { Ionicons } from '@expo/vector-icons'
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { containerBgColor, textColor } from './styles/global'
+import ProfileScreen from './screens/ProfileScreen'
+import EditProfileScreen from './screens/EditProfileScreen'
+import UploadSightingScreen from './screens/UploadSightingScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -40,13 +43,16 @@ export default function App() {
           <Stack.Screen name="Explore Bottom Sheet" component={ExploreBottomSheet} />
           <Stack.Screen name="Explore More Sightings" component={ExploreMoreSightings} />
           <Stack.Screen name="Explore Map" component={ExploreScreen} />
+          <Stack.Screen name="Profile" component={ProfileScreen} />
+          <Stack.Screen name="Edit Profile" component={EditProfileScreen} />
+          <Stack.Screen name="Upload Sighting" component={UploadSightingScreen} />
           <Stack.Screen
             name="Bird Details"
             component={BirdDetails}
             options={({ route, navigation }) => ({
               headerRight: () => (
-                <Ionicons
-                  name="refresh"
+                <MaterialCommunityIcons
+                  name="reload"
                   size={24}
                   color={textColor}
                   onPress={() => {

@@ -46,12 +46,12 @@ const globalStyles = StyleSheet.create({
     marginRight: 7,
     paddingVertical: 13,
     justifyContent: 'center',
-    alignItems: 'center',
   },
   input: {
     paddingVertical: 13,
     color: textColor,
     width: '86%',
+    alignSelf: 'center',
   },
   titleText: {
     fontSize: 28,
@@ -154,9 +154,9 @@ const globalStyles = StyleSheet.create({
     alignItems: 'center',
   },
   profileSetupContainer: {
-    backgroundColor: '#FFFAFA',
+    backgroundColor: containerBgColor,
     justifyContent: 'center',
-    paddingHorizontal: 50,
+    paddingHorizontal: '10%',
     flex: 1,
     alignItems: 'center',
   },

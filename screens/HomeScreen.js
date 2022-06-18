@@ -40,6 +40,18 @@ const HomeScreen = () => {
     navigation.navigate('Bird Details')
   }
 
+  const handleProfile = () => {
+    navigation.navigate('Profile')
+  }
+
+  const handleEditProfile = () => {
+    navigation.navigate('Edit Profile')
+  }
+
+  const handleUploadSighting = () => {
+    navigation.navigate('Upload Sighting')
+  }
+
   return (
     <View style={globalStyles.signupLoginContainer}>
       <Text>Email: {auth.currentUser?.email}</Text>
@@ -49,6 +61,9 @@ const HomeScreen = () => {
       <RectButtonOutline text={'Explore Map'} handlePress={handleExplore} />
       <RectButtonOutline text={'Verify'} handlePress={handleVerify} />
       <RectButtonOutline text={'Bird Details'} handlePress={handleBirdDetails} />
+      <RectButtonOutline text={'Profile'} handlePress={handleProfile} />
+      <RectButtonOutline text={'Edit Profile'} handlePress={handleEditProfile} />
+      <RectButtonOutline text={'Upload Sighting'} handlePress={handleUploadSighting} />
     </View>
   )
 }

@@ -122,6 +122,7 @@ const BirdDetails = ({ route, navigation }) => {
   }
 
   useLayoutEffect(() => {
+    // change the title of the page
     navigation.setOptions({
       title: sight.commonName,
     })

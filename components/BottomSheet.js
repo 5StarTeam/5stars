@@ -25,6 +25,7 @@ import { getFirestore } from 'firebase/firestore'
 import { async } from '@firebase/util'
 import SortContainer from './sightseeing/SortContainer'
 import { useNavigation } from '@react-navigation/core'
+import SightsList from './sightseeing/SightsList'
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window')
 
@@ -84,7 +85,7 @@ const BottomSheet = forwardRef(({ children }, ref) => {
 
   useEffect(() => {
     // smaller divider factor => nearer to the top of the screen
-    translateY.value = withSpring(-SCREEN_HEIGHT / 1.8, { damping: 12 })
+    translateY.value = withSpring(-SCREEN_HEIGHT / 1.9, { damping: 12 })
 
     const fetchData = async () => {
       try {
@@ -102,23 +103,11 @@ const BottomSheet = forwardRef(({ children }, ref) => {
       }
     }
     fetchData()
+    return () => {
+      console.log('unmount bottom sheet')
+      setSightsData([])
+    }
   }, [])
-
-  const sightList = isHorizontalScroll =>
-    sightsData?.map((sight, i) => {
-      return (
-        <SightCard
-          sight={sight}
-          handlePress={() => {
-            navigation.navigate('Bird Details', {
-              initialSight: sight,
-            })
-          }}
-          key={sight.commonName}
-          isHorizontalScroll={isHorizontalScroll}
-        />
-      )
-    })
 
   const handleSortRarest = () => {
     setSort(0)
@@ -148,16 +137,7 @@ const BottomSheet = forwardRef(({ children }, ref) => {
         </TouchableWithoutFeedback>
         {/*{children}*/}
         <SortContainer sort={sort} handleSortRarest={handleSortRarest} handleSortLatest={handleSortLatest} />
-
-        {isVertical ? (
-          <ScrollView style={globalStyles.exploreViewContainer}>
-            <View style={globalStyles.exploreSightsContainer}>{sightList(false)}</View>
-          </ScrollView>
-        ) : (
-          <ScrollView style={globalStyles.exploreViewContainer} horizontal={true}>
-            <View style={globalStyles.exploreSightsScrollContainer}>{sightList(true)}</View>
-          </ScrollView>
-        )}
+        <SightsList sightsData={sightsData} isHorizontalScroll={!isVertical} />
       </Animated.View>
     </GestureDetector>
   )
@@ -185,12 +165,8 @@ const styles = StyleSheet.create({
     height: 4,
     backgroundColor: '#E5D7D5',
     alignSelf: 'center',
-    top: 12,
+    top: 10,
     borderRadius: 5,
-  },
-  exploreContainer: {
-    paddingVertical: 12,
-    paddingHorizontal: 15,
   },
 })
 
