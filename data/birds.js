@@ -1,4 +1,4 @@
-{
+export const birdList = {
       "Dendrocygna arcuata": {
             "commonName": "Wandering Whistling Duck",
             "rarity": "Non-rarity",
