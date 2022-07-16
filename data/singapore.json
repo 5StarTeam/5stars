@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [103.88326 , 1.29894]
+      },
+      "properties": {
+        "title": "Dunman High School",
+        "isSelected": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [103.912842, 1.320982]
+      },
+      "properties": {
+        "title": "Kembangan",
+        "isSelected": true
+      }
+    }
+  ]
+}

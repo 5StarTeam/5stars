@@ -3,7 +3,9 @@ import { useNavigation } from '@react-navigation/core'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { app } from '../core/Firebase'
 import { getAuth, signOut } from 'firebase/auth'
-import { Route } from '../services/RoutingService'
+import RectButton from '../components/common/rectButton'
+import { globalStyles } from '../styles/global'
+import RectButtonOutline from '../components/common/rectButtonOutline'
 
 const auth = getAuth(app)
 
@@ -30,28 +32,38 @@ const HomeScreen = () => {
     navigation.navigate('Explore Map')
   }
 
-  const handleUpload = () => {
-    navigation.navigate(Route.UPLOAD)
+  const handleVerify = () => {
+    navigation.navigate('Verify')
+  }
+
+  const handleBirdDetails = () => {
+    navigation.navigate('Bird Details')
+  }
+
+  const handleProfile = () => {
+    navigation.navigate('Profile')
+  }
+
+  const handleEditProfile = () => {
+    navigation.navigate('Edit Profile')
+  }
+
+  const handleUploadSighting = () => {
+    navigation.navigate('Upload Sighting')
   }
 
   return (
-    <View style={styles.container}>
+    <View style={globalStyles.signupLoginContainer}>
       <Text>Email: {auth.currentUser?.email}</Text>
-      <TouchableOpacity onPress={handleSignOut} style={styles.button}>
-        <Text style={styles.buttonText}>Sign out</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleExample} style={styles.button}>
-        <Text style={styles.buttonText}>CRUD Page</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleUpload} style={styles.button}>
-        <Text style={styles.buttonText}>Upload Page</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleNavigateBottomDrawer} style={styles.button}>
-        <Text style={styles.buttonText}>Explore Bottom Drawer</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleExplore} style={styles.button}>
-        <Text style={styles.buttonText}>Explore Map</Text>
-      </TouchableOpacity>
+      <RectButton text={'Sign out'} handlePress={handleSignOut} />
+      <RectButtonOutline text={'CRUD page'} handlePress={handleExample} />
+      <RectButtonOutline text={'Explore Bottom Drawer'} handlePress={handleNavigateBottomDrawer} />
+      <RectButtonOutline text={'Explore Map'} handlePress={handleExplore} />
+      <RectButtonOutline text={'Verify'} handlePress={handleVerify} />
+      <RectButtonOutline text={'Bird Details'} handlePress={handleBirdDetails} />
+      <RectButtonOutline text={'Profile'} handlePress={handleProfile} />
+      <RectButtonOutline text={'Edit Profile'} handlePress={handleEditProfile} />
+      <RectButtonOutline text={'Upload Sighting'} handlePress={handleUploadSighting} />
     </View>
   )
 }
@@ -63,6 +75,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#FFFCFC',
   },
   button: {
     backgroundColor: '#0782F9',

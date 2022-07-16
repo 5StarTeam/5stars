@@ -20,14 +20,14 @@ const ExploreBottomSheet = () => {
    */
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <View style={styles.container}>
-        {/*<TouchableOpacity style={styles.button} onPress={handlePress}>*/}
-        {/*</TouchableOpacity>*/}
+    // <GestureHandlerRootView style={{ flex: 1 }}>
+    <View style={styles.container}>
+      {/*<TouchableOpacity style={styles.button} onPress={handlePress}>*/}
+      {/*</TouchableOpacity>*/}
 
-        <BottomSheet ref={ref}></BottomSheet>
-      </View>
-    </GestureHandlerRootView>
+      <BottomSheet ref={ref} />
+    </View>
+    // </GestureHandlerRootView>
   )
 }
 

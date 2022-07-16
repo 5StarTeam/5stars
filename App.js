@@ -13,6 +13,13 @@ import VerifyScreen from './screens/VerifyScreen'
 import ExploreScreen from './screens/ExploreScreen'
 import UploadScreen from './screens/UploadScreen';
 import store from './redux/store'
+import ExploreMoreSightings from './screens/ExploreMoreSightings'
+import BirdDetails from './screens/BirdDetails'
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
+import { containerBgColor, textColor } from './styles/global'
+import ProfileScreen from './screens/ProfileScreen'
+import EditProfileScreen from './screens/EditProfileScreen'
+import UploadSightingScreen from './screens/UploadSightingScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -20,14 +27,41 @@ export default function App() {
   return (
   <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen options={{ headerShown: false }} name={Route.LOGIN} component={LoginScreen} />
-          <Stack.Screen name={Route.VERIFY} component={VerifyScreen} />
-          <Stack.Screen name={Route.HOME} component={HomeScreen} />
-          <Stack.Screen name={Route.UPLOAD} component={UploadScreen} />
-          <Stack.Screen name={Route.EXAMPLE} component={ExampleScreen} />
-          <Stack.Screen name={Route.EXPLORE} component={ExploreScreen} />
+        <Stack.Navigator
+          screenOptions={{
+            // headerStyle: {
+            //   backgroundColor: containerBgColor,
+            // },
+            headerTintColor: textColor,
+            headerTitleAlign: 'center',
+          }}
+        >
+          <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Verify" component={VerifyScreen} />
+          <Stack.Screen name="Example" component={ExampleScreen} />
           <Stack.Screen name="Explore Bottom Sheet" component={ExploreBottomSheet} />
+          <Stack.Screen name="Explore More Sightings" component={ExploreMoreSightings} />
+          <Stack.Screen name="Explore Map" component={ExploreScreen} />
+          <Stack.Screen name="Profile" component={ProfileScreen} />
+          <Stack.Screen name="Edit Profile" component={EditProfileScreen} />
+          <Stack.Screen name="Upload Sighting" component={UploadSightingScreen} />
+          <Stack.Screen
+            name="Bird Details"
+            component={BirdDetails}
+            options={({ route, navigation }) => ({
+              headerRight: () => (
+                <MaterialCommunityIcons
+                  name="reload"
+                  size={24}
+                  color={textColor}
+                  onPress={() => {
+                    console.log('Refresh')
+                  }}
+                />
+              ),
+            })}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
