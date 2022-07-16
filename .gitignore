@@ -45,6 +45,7 @@ project.xcworkspace
 #
 .gradle
 gradlew
+android/gradlew
 */gradlew
 gradlew.bat
 build/
@@ -92,4 +93,3 @@ dist/
 # Android Studio
 
 # @end expo-cli
-android/gradlew
