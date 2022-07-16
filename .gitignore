@@ -43,11 +43,22 @@ project.xcworkspace
 
 # Android/IntelliJ
 #
-build/
-.idea
 .gradle
-local.properties
+gradlew
+gradlew.bat
+build/
+/.idea/workspace.xml
+.idea/
+/local.properties
+/*/local.properties
+/*/out
+/*/*/build
+/*/*/production
 *.iml
+*~
+*.swp
+*.ipr
+*.iws
 *.hprof
 
 # node.js
@@ -76,5 +87,7 @@ dist/
 # dotenv environment variables file
 .env
 .env.test
+
+# Android Studio
 
 # @end expo-cli
